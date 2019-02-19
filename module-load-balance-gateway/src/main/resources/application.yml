@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: gateway
+
+server:
+  port: 80
+
+
+
+
+
+#router to url
+#config the route to mapping path
+#zuul:
+#  routes:
+#    api-service-module:
+#      path: /service-module/**
+#      serviceId: PERIPHERAL-MALL-SERVICE-MODULE
+
+#endpoints:
+#  routes:
+#    sensitive: false
+

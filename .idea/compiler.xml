@@ -16,7 +16,7 @@
       <module name="api-gateway" target="1.8" />
       <module name="eureka-register-center" target="11" />
       <module name="git-config-sever" target="11" />
-      <module name="module-load-balance-gateway" target="11" />
+      <module name="module-load-balance-gateway" target="1.8" />
       <module name="service-module" target="11" />
     </bytecodeTargetLevel>
   </component>

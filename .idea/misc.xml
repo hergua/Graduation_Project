@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/git-config-sever/pom.xml" />
         <option value="$PROJECT_DIR$/module-load-balance-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/service-module/pom.xml" />
+        <option value="$PROJECT_DIR$/service-module-article/pom.xml" />
       </list>
     </option>
   </component>

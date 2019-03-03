@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/git-config-sever/git-config-sever.iml" filepath="$PROJECT_DIR$/git-config-sever/git-config-sever.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-load-balance-gateway/module-load-balance-gateway.iml" filepath="$PROJECT_DIR$/module-load-balance-gateway/module-load-balance-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-module/service-module.iml" filepath="$PROJECT_DIR$/service-module/service-module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-module-article/service-module-article.iml" filepath="$PROJECT_DIR$/service-module-article/service-module-article.iml" />
     </modules>
   </component>
 </project>

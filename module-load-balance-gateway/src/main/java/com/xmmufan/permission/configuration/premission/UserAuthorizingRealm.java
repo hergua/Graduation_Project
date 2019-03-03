@@ -33,14 +33,12 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
 
-
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         if (principals == null) {
             throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
         }
         String username = (String) principals.getPrimaryPrincipal();
-
         Set<String> roles = new HashSet<>();
         Set<String> permissions = new HashSet<>();
         try {
@@ -77,8 +75,13 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
 
         return new SimpleAuthenticationInfo(username, password, ByteSource.Util.bytes(salt), this.getName());
     }
-
-
+    /**
+     * @Description
+     * @Param [credentialsMatcher]
+     * @Author Hergua
+     * @Date  2019/2/20
+     * @return void
+     **/
     @Override
     public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();

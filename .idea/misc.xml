@@ -11,8 +11,11 @@
         <option value="$PROJECT_DIR$/module-load-balance-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/service-module/pom.xml" />
         <option value="$PROJECT_DIR$/service-module-article/pom.xml" />
+        <option value="$PROJECT_DIR$/service-module-picture/pom.xml" />
+        <option value="$PROJECT_DIR$/service-module-video/pom.xml" />
+        <option value="$PROJECT_DIR$/service-module-micro-program/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

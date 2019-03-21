@@ -21,6 +21,11 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
+    /**
+     * 上传图片文件的接口
+     * @param file 需要上传的文件图片
+     * @return 保存后的URL路径
+     */
     @PostMapping("/upload")
     public String uploadImage(MultipartFile file){
         try{

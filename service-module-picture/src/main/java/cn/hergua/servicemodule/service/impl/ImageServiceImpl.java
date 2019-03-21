@@ -9,7 +9,6 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +21,7 @@ import java.util.UUID;
  * @author: Mr.Hergua | 黄源钦
  * @version: 1.0     2018/10/21
  * <p>
+ *     七牛云图片上传service
  * </p>
  */
 
@@ -34,7 +34,7 @@ public class ImageServiceImpl implements ImageService {
 
     private static final String SECRET_KEY = "JFwZbldp7sDzAxvxTJSD2yB7-tUdiuLKsEGlsqoi";
 
-    private static final String buckName = "picture_server";
+    private static final String BUCK_NAME = "picture_server";
 
     private static final String IMAGE_DOMAIN = "popf2cli9.bkt.clouddn.com/";
 
@@ -44,12 +44,13 @@ public class ImageServiceImpl implements ImageService {
 
 
     private String getUpToken() {
-        return auth.uploadToken(buckName);
+        return auth.uploadToken(BUCK_NAME);
     }
 
 
     /**
      * 进行文件上传七牛云
+     *
      * @param file 图片文件
      * @return 七牛云返回的路径或抛出异常
      * @throws IOException 可能发生的异常
@@ -57,30 +58,24 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public String saveImage(MultipartFile file) throws IOException {
 
-        try {
-            int dotPos = file.getOriginalFilename().lastIndexOf(".");
-            if (dotPos < 0) {
-                throw new RuntimeException("图片文件名非法");
-            }
-            String fileExt = file.getOriginalFilename().substring(dotPos + 1).toLowerCase();
-            if (!FileUtil.isFileAllowed(fileExt)) {
-                throw new RuntimeException("仅允许上传图片文件");
-            }
-
-            String fileName = UUID.randomUUID().toString().replaceAll("-", "") + "." + fileExt;
-            Response res = uploadManager.put(file.getBytes(), fileName, getUpToken());
-            if (res.isOK() && res.isJson()) {
-                log.info(res.bodyString());
-                return IMAGE_DOMAIN + JSONObject.parseObject(res.bodyString()).get("key");
-            } else {
-                log.error("七牛异常:" + res.bodyString());
-                throw new RuntimeException("七牛异常:" + res.bodyString());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        int dotPos = Objects.requireNonNull(file.getOriginalFilename()).lastIndexOf(".");
+        if (dotPos < 0) {
+            throw new RuntimeException("图片文件名非法");
         }
-        return null;
+        String fileExt = file.getOriginalFilename().substring(dotPos + 1).toLowerCase();
+        if (!FileUtil.isFileAllowed(fileExt)) {
+            throw new RuntimeException("仅允许上传图片文件");
+        }
+
+        String fileName = UUID.randomUUID().toString().replaceAll("-", "") + "." + fileExt;
+        Response res = uploadManager.put(file.getBytes(), fileName, getUpToken());
+        if (res.isOK() && res.isJson()) {
+            log.info(res.bodyString());
+            return IMAGE_DOMAIN + JSONObject.parseObject(res.bodyString()).get("key");
+        } else {
+            log.error("七牛异常:" + res.bodyString());
+            throw new RuntimeException("七牛异常:" + res.bodyString());
+        }
     }
-
-
 }
+

@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.hergua</groupId>
-    <artifactId>service-module</artifactId>
+    <artifactId>service-module-micro-program</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>service-module</name>
+    <name>service-module-micro-program</name>
     <description>service module</description>
 
     <parent>

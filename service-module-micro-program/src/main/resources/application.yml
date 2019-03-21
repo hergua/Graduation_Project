@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: service-module
+server:
+  port: 8010

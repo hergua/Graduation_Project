@@ -11,6 +11,9 @@
         <option value="$PROJECT_DIR$/module-load-balance-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/service-module/pom.xml" />
         <option value="$PROJECT_DIR$/service-module-article/pom.xml" />
+        <option value="$PROJECT_DIR$/service-module-picture/pom.xml" />
+        <option value="$PROJECT_DIR$/service-module-video/pom.xml" />
+        <option value="$PROJECT_DIR$/service-module-micro-program/pom.xml" />
       </list>
     </option>
   </component>

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 
+/**
+ * @author Hergua
+ */
 @RestController
 @RequestMapping("/ImageFile")
 @Slf4j
@@ -21,7 +24,11 @@ public class ImageController {
     @PostMapping("/upload")
     public String uploadImage(MultipartFile file){
         try{
+            if (file == null){
+                throw new NullPointerException("文件参数为空！");
+            }
             String message = imageService.saveImage(file);
+            log.info("图片保存成功！！URL: "+ message);
             return message;
         }catch (Exception e){
             return e.getMessage();

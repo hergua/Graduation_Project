@@ -32,11 +32,11 @@ public class ImageServiceImpl implements ImageService {
 
     private static final String ACCESS_KEY = "iK_pM9aLioR5k3tB_r2oYNuerxn_hA8kcyE8PBiX";
 
-    private static final String SECRET_KEY = "JFwZbldp7sDzAxvxTJSD2yB7";
+    private static final String SECRET_KEY = "JFwZbldp7sDzAxvxTJSD2yB7-tUdiuLKsEGlsqoi";
 
     private static final String buckName = "picture_server";
 
-    private static final String IMAGE_DOMAIN = "popf2cli9.bkt.clouddn.com";
+    private static final String IMAGE_DOMAIN = "popf2cli9.bkt.clouddn.com/";
 
     private Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
     private Configuration configuration = new Configuration(Zone.zone2());
@@ -58,7 +58,7 @@ public class ImageServiceImpl implements ImageService {
     public String saveImage(MultipartFile file) throws IOException {
 
         try {
-            int dotPos = Objects.requireNonNull(file.getOriginalFilename()).lastIndexOf(".");
+            int dotPos = file.getOriginalFilename().lastIndexOf(".");
             if (dotPos < 0) {
                 throw new RuntimeException("图片文件名非法");
             }
@@ -70,6 +70,7 @@ public class ImageServiceImpl implements ImageService {
             String fileName = UUID.randomUUID().toString().replaceAll("-", "") + "." + fileExt;
             Response res = uploadManager.put(file.getBytes(), fileName, getUpToken());
             if (res.isOK() && res.isJson()) {
+                log.info(res.bodyString());
                 return IMAGE_DOMAIN + JSONObject.parseObject(res.bodyString()).get("key");
             } else {
                 log.error("七牛异常:" + res.bodyString());

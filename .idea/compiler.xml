@@ -19,14 +19,14 @@
     <bytecodeTargetLevel>
       <module name="api-gateway" target="1.8" />
       <module name="eureka-register-center" target="1.8" />
-      <module name="git-config-sever" target="11" />
+      <module name="git-config-sever" target="1.8" />
       <module name="module-load-balance-gateway" target="1.8" />
-      <module name="service-module" target="11" />
+      <module name="service-module" target="1.8" />
       <module name="service-module (1)" target="11" />
-      <module name="service-module-article" target="11" />
-      <module name="service-module-micro-program" target="11" />
-      <module name="service-module-picture" target="11" />
-      <module name="service-module-video" target="11" />
+      <module name="service-module-article" target="1.8" />
+      <module name="service-module-micro-program" target="1.8" />
+      <module name="service-module-picture" target="1.8" />
+      <module name="service-module-video" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

@@ -1,5 +1,11 @@
 spring:
   application:
-    name: service-module
+    name: service-module-picture
 server:
-  port: 8010
+  port: 5000
+
+
+accesskey: iK_pM9aLioR5k3tB_r2oYNuerxn_hA8kcyE8PBiX
+secretkey: JFwZbldp7sDzAxvxTJSD2yB7-tUdiuLKsEGlsqoi
+bucket: picture_server
+cdns: popf2cli9.bkt.clouddn.com

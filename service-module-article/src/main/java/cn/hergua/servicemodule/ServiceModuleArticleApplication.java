@@ -7,9 +7,9 @@ import org.springframework.cloud.client.SpringCloudApplication;
  * @author Hergua
  */
 @SpringCloudApplication
-public class ServiceModuleApplication {
+public class ServiceModuleArticleApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ServiceModuleApplication.class, args);
+        SpringApplication.run(ServiceModuleArticleApplication.class, args);
     }
 }

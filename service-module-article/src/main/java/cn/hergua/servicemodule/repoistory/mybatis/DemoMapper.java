@@ -19,6 +19,10 @@ import java.util.List;
 @Repository
 public interface DemoMapper {
 
+    /**
+     *
+     * @return
+     */
     @Select("SELECT * FROM demo")
     List<String> selectDemoAll();
 

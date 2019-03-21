@@ -1,15 +1,8 @@
-server:
-  port: 8010
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8000/eureka/
 publickey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAK/0YWAoLWtrRcqA5NnmgxRmeyWRSnZzyxCWYWxHm9qk4LxtpyLNz1OkkYuTdUajbERuN1L68S0xHewVNv6elOcCAwEAAQ==
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://hergua.cn:3306/mall
+    url: jdbc:mysql://hergua.cn:3306/evaluation
     username: server
     password: AoRPgnVxlq60xigEUw8SuTBRbH6GGhlkoA5NqIM/tIZshfW3nrXiSst85lIkpZ/o6vztM74V3D3Atb137beDwQ==
     type: com.alibaba.druid.pool.DruidDataSource
@@ -30,6 +23,10 @@ spring:
     druid:
       filters: config
       connection-properties: config.decrypt=true;config.decrypt.key=${publickey}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   http:
     encoding:
       charset: utf-8

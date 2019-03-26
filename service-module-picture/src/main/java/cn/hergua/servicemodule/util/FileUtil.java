@@ -1,5 +1,9 @@
 package cn.hergua.servicemodule.util;
 
+/**
+ * @author Hergua
+ * 用于文件的属性判断类
+ */
 public class FileUtil {
 
 

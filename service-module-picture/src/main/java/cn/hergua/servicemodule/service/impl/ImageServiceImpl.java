@@ -2,6 +2,7 @@ package cn.hergua.servicemodule.service.impl;
 
 import cn.hergua.servicemodule.service.ImageService;
 import cn.hergua.servicemodule.util.FileUtil;
+import cn.hergua.servicemodule.util.QINIUProperties;
 import com.alibaba.fastjson.JSONObject;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
@@ -9,6 +10,7 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +29,6 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-@PropertySource("classpath:/qiniu.properties")
 public class ImageServiceImpl implements ImageService {
 
     private static final String ACCESS_KEY = "iK_pM9aLioR5k3tB_r2oYNuerxn_hA8kcyE8PBiX";
@@ -37,6 +38,7 @@ public class ImageServiceImpl implements ImageService {
     private static final String BUCK_NAME = "picture_server";
 
     private static final String IMAGE_DOMAIN = "popf2cli9.bkt.clouddn.com/";
+
 
     private Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
     private Configuration configuration = new Configuration(Zone.zone2());

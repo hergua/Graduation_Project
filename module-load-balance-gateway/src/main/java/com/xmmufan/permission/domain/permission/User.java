@@ -1,6 +1,8 @@
 package com.xmmufan.permission.domain.permission;
 
 
+import com.xmmufan.permission.domain.UserInfo;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -51,6 +53,7 @@ public class User implements Serializable {
     @JoinTable(name = "SysUserRole", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "roleId")})
     private List<SysRole> roleList;
+
 
     public Long getId() {
         return id;
@@ -108,4 +111,5 @@ public class User implements Serializable {
     public void setRoleList(List<SysRole> roleList) {
         this.roleList = roleList;
     }
+
 }

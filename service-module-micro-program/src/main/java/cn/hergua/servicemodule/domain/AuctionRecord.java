@@ -23,7 +23,7 @@ public class AuctionRecord  implements Serializable {
 
     private Long userId;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Auction.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "auctionId")
     private Auction auction;
 

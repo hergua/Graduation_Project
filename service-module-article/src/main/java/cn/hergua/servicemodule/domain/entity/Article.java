@@ -20,7 +20,7 @@ public class Article {
     private Long id;
 
     @JoinColumn(name = "type_id")
-    @ManyToOne
+    @ManyToOne(targetEntity = ArticleType.class, cascade = CascadeType.REFRESH)
     private ArticleType articleType;
 
     private Long userId;
@@ -31,6 +31,8 @@ public class Article {
 
     private String introduction;
 
+    private String videoUrl;
+
     @Lob
     private String content;
 
@@ -38,6 +40,13 @@ public class Article {
 
     private Timestamp updateTime;
 
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
 
     public Long getId() {
         return id;

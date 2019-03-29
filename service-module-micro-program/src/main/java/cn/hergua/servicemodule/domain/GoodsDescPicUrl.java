@@ -20,7 +20,7 @@ public class GoodsDescPicUrl implements Serializable {
     private Long id;
 
     @JoinColumn(name = "goodsId")
-    @ManyToOne
+    @ManyToOne(targetEntity = Goods.class, cascade = CascadeType.REFRESH)
     private Goods goods;
 
     private String url;

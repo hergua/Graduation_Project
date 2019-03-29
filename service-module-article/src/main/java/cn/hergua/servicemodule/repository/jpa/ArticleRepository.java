@@ -1,6 +1,6 @@
-package cn.hergua.servicemodule.repoistory.jpa;
+package cn.hergua.servicemodule.repository.jpa;
 
-import cn.hergua.servicemodule.domain.entity.ArticleType;
+import cn.hergua.servicemodule.domain.entity.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +13,5 @@ import org.springframework.stereotype.Repository;
  * </p>
  */
 @Repository
-public interface TypeRepository extends JpaRepository<ArticleType, Long> {
+public interface ArticleRepository extends JpaRepository<Article, Long> {
 }

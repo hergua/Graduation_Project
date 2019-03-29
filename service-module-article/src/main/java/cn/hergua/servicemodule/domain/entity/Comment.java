@@ -21,7 +21,9 @@ public class Comment {
 
     private Long userId;
 
-    private Long toArticleId;
+    @JoinColumn(name = "toArticleId")
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Article.class, cascade = CascadeType.REFRESH)
+    private Article article;
 
     private Long referCommentId;
 
@@ -29,6 +31,16 @@ public class Comment {
 
     private Timestamp updateTime;
 
+    @Lob
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public Long getId() {
         return id;
@@ -46,12 +58,12 @@ public class Comment {
         this.userId = userId;
     }
 
-    public Long getToArticleId() {
-        return toArticleId;
+    public Article getArticle() {
+        return article;
     }
 
-    public void setToArticleId(Long toArticleId) {
-        this.toArticleId = toArticleId;
+    public void setArticle(Article article) {
+        this.article = article;
     }
 
     public Long getReferCommentId() {

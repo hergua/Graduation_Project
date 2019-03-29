@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="org.springframework.web.bind.annotation.RestController" />
+    </list>
+  </component>
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
@@ -12,8 +17,8 @@
         <option value="$PROJECT_DIR$/service-module/pom.xml" />
         <option value="$PROJECT_DIR$/service-module-article/pom.xml" />
         <option value="$PROJECT_DIR$/service-module-picture/pom.xml" />
-        <option value="$PROJECT_DIR$/service-module-video/pom.xml" />
         <option value="$PROJECT_DIR$/service-module-micro-program/pom.xml" />
+        <option value="$PROJECT_DIR$/service-module-video/pom.xml" />
       </list>
     </option>
   </component>

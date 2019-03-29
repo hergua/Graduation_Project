@@ -17,13 +17,14 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "tab_action")
+@Table(name = "tab_auction")
 public class Auction implements Serializable {
 
     @Id
     private Long id;
 
     @JoinColumn(name = "goodsId")
+    @OneToOne(targetEntity = Goods.class, cascade = CascadeType.ALL)
     private Goods goods;
 
     private String type;
@@ -34,7 +35,7 @@ public class Auction implements Serializable {
 
     private BigDecimal currentPrice;
 
-    @OneToMany(mappedBy = "auction")
+    @OneToMany(mappedBy = "auction", targetEntity = AuctionRecord.class, cascade = CascadeType.REFRESH)
     private List<AuctionRecord> records;
 
     private Timestamp transactionTime;

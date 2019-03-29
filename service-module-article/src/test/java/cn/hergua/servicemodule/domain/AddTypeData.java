@@ -1,14 +1,12 @@
 package cn.hergua.servicemodule.domain;
 
 import cn.hergua.servicemodule.domain.entity.ArticleType;
-import cn.hergua.servicemodule.repoistory.jpa.TypeRepository;
+import cn.hergua.servicemodule.repository.jpa.TypeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.annotation.Resource;
 
 /**
  * @Author Hergua

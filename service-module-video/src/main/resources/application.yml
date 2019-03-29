@@ -1,5 +1,10 @@
 spring:
   application:
-    name: service-module
+    name: service-module-video
 server:
-  port: 8010
+  port: 9000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/

@@ -1,8 +1,6 @@
 package cn.hergua.servicemodule.domain.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
@@ -23,7 +21,9 @@ public class Like {
 
     private Long userId;
 
-    private Long commentId;
+    @JoinColumn(name = "commentId")
+    @ManyToOne(targetEntity = Comment.class, cascade = CascadeType.REFRESH)
+    private Comment comment;
 
     private Timestamp createTime;
 
@@ -44,12 +44,12 @@ public class Like {
         this.userId = userId;
     }
 
-    public Long getCommentId() {
-        return commentId;
+    public Comment getComment() {
+        return comment;
     }
 
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
+    public void setComment(Comment comment) {
+        this.comment = comment;
     }
 
     public Timestamp getCreateTime() {

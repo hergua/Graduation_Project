@@ -1,4 +1,4 @@
-package cn.hergua.servicemodule.repoistory.mybatis;
+package cn.hergua.servicemodule.repository.mybatis;
 
 
 

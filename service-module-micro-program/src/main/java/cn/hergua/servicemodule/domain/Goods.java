@@ -26,6 +26,8 @@ public class Goods  implements Serializable {
 
     private Long userId;
 
+    private String introduce;
+
     private String goodsName;
 
     private String goodsHeadPictureUrl;
@@ -39,7 +41,7 @@ public class Goods  implements Serializable {
      */
     private String status;
 
-    @OneToMany(mappedBy = "goods")
+    @OneToMany(mappedBy = "goods", targetEntity = GoodsDescPicUrl.class, cascade = CascadeType.ALL)
     private List<GoodsDescPicUrl> urls;
 
     public String getStatus() {
@@ -112,5 +114,13 @@ public class Goods  implements Serializable {
 
     public void setUrls(List<GoodsDescPicUrl> urls) {
         this.urls = urls;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
     }
 }

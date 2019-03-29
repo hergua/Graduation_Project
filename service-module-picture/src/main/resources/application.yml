@@ -1,8 +1,8 @@
 spring:
   application:
-    name: service-module-picture
+    name: service-module-video
 server:
-  port: 5000
+  port: 9000
 
 
 accesskey: iK_pM9aLioR5k3tB_r2oYNuerxn_hA8kcyE8PBiX

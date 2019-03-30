@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * @Author Hergua
@@ -16,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tab_type")
-public class ArticleType {
+public class ArticleType implements Serializable {
 
     @Id
     private Long id;
@@ -62,10 +63,7 @@ public class ArticleType {
     public ArticleType() {
     }
 
-    public ArticleType(Long id, String firstType, String secondType, String typeDesc) {
+    public ArticleType(Long id) {
         this.id = id;
-        this.secondType = secondType;
-        this.typeDesc = typeDesc;
-        this.firstType = firstType;
     }
 }

@@ -1,0 +1,54 @@
+{
+  "statusCode": 200,
+  "message": "返回成功",
+  "data": [
+    {
+      "id": 1,
+      "articleType": {
+        "id": 1,
+        "secondType": "耳机",
+        "typeDesc": null,
+        "firstType": "外设"
+      },
+      "userId": 2500665335353344,
+      "title": "文章1的标题",
+      "headPictureUrl": null,
+      "introduction": "文章1的介绍",
+      "content": "文章1的内容",
+      "createTime": "2019-03-30T10:11:46.000+0000",
+      "updateTime": "2019-03-30T10:12:06.000+0000"
+    },
+    {
+      "id": 2,
+      "articleType": {
+        "id": 2,
+        "secondType": "键盘",
+        "typeDesc": null,
+        "firstType": "外设"
+      },
+      "userId": 2500665335353344,
+      "title": "文章2的标题",
+      "headPictureUrl": null,
+      "introduction": "文章2的介绍",
+      "content": "文章2的内容",
+      "createTime": "2019-03-30T10:11:46.000+0000",
+      "updateTime": "2019-03-30T10:12:06.000+0000"
+    },
+    {
+      "id": 3,
+      "articleType": {
+        "id": 3,
+        "secondType": "鼠标",
+        "typeDesc": null,
+        "firstType": "外设"
+      },
+      "userId": 2500665335353344,
+      "title": "文章3的标题",
+      "headPictureUrl": null,
+      "introduction": "文章3的介绍",
+      "content": "文章3的内容",
+      "createTime": "2019-03-30T10:11:46.000+0000",
+      "updateTime": "2019-03-30T10:12:06.000+0000"
+    }
+  ]
+}

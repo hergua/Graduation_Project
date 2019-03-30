@@ -1,6 +1,7 @@
 package cn.hergua.servicemodule.domain.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -14,7 +15,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "tab_comment")
-public class Comment {
+public class Comment implements Serializable {
 
     @Id
     private Long id;

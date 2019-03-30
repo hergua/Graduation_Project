@@ -7,34 +7,30 @@ import java.sql.Timestamp;
 /**
  * @Author Hergua
  * @Version 1.0
- * @Date 2019/3/3
+ * @Date 2019/3/30
  * <p>
- *   文章实体类
+ *
  * </p>
  */
-
 @Entity
-@Table(name = "tab_article")
-public class Article implements Serializable {
+@Table(name = "tab_video_article")
+public class VideoArticle implements Serializable {
 
     @Id
     private Long id;
 
-    @JoinColumn(name = "type_id")
-    @ManyToOne(targetEntity = ArticleType.class, cascade = CascadeType.REFRESH)
-    private ArticleType articleType;
-
-    private Long userId;
-
-    private String title;
+    private String videoUrl;
 
     private String headPictureUrl;
 
-    private String introduction;
-
+    @ManyToOne(targetEntity = ArticleType.class, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "typeId")
+    private ArticleType type;
 
     @Lob
-    private String content;
+    private String introduction;
+
+    private Long userId;
 
     private Timestamp createTime;
 
@@ -48,28 +44,12 @@ public class Article implements Serializable {
         this.id = id;
     }
 
-    public ArticleType getArticleType() {
-        return articleType;
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
-    public void setArticleType(ArticleType articleType) {
-        this.articleType = articleType;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     public String getHeadPictureUrl() {
@@ -80,6 +60,14 @@ public class Article implements Serializable {
         this.headPictureUrl = headPictureUrl;
     }
 
+    public ArticleType getType() {
+        return type;
+    }
+
+    public void setType(ArticleType type) {
+        this.type = type;
+    }
+
     public String getIntroduction() {
         return introduction;
     }
@@ -88,12 +76,12 @@ public class Article implements Serializable {
         this.introduction = introduction;
     }
 
-    public String getContent() {
-        return content;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Timestamp getCreateTime() {

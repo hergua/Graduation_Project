@@ -6,6 +6,7 @@ import cn.hergua.servicemodule.domain.entity.Article;
 import cn.hergua.servicemodule.domain.entity.ArticleType;
 import cn.hergua.servicemodule.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,11 @@ public class ArticleController {
     public ResponseModel saveArticle(Long typeId, Article article){
         ResponseModel model = new ResponseModel();
         try {
+            if (StringUtils.isAnyBlank(article.getContent(),article.getIntroduction(),article.getTitle()) ||
+                    article.getUserId() == null || typeId == null){
+                throw new Exception("保存文章，传入参数错误，存在空值");
+
+            }
             article.setId(new SnowFlake().nextId());
             ArticleType type = new ArticleType(typeId);
             article.setCreateTime(new Timestamp(System.currentTimeMillis()));
@@ -47,8 +53,8 @@ public class ArticleController {
             articleService.save(article);
             log.info("article: "+article.getId()+" save success by user: "+article.getUserId());
         } catch (Exception e) {
-            log.error(e.getMessage());
-            model.setStatusCode(HttpStatus.BAD_GATEWAY.value());
+            log.error(e.getMessage()+"  用户ID："+article.getUserId());
+            model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             model.setMessage(e.getMessage());
         }
         return model;
@@ -61,11 +67,15 @@ public class ArticleController {
             ArticleType type = new ArticleType(typeId);
             article.setUpdateTime(new Timestamp(System.currentTimeMillis()));
             article.setArticleType(type);
+            if (StringUtils.isAnyBlank(article.getContent(),article.getIntroduction(),article.getTitle()) ||
+            article.getUserId() == null || typeId == null || article.getId() == null){
+                throw new RuntimeException("保存文章，传入参数错误，存在空值");
+            }
             articleService.updateArticle(article);
             log.info("article: "+article.getId()+" update success by user: "+article.getUserId());
         } catch (Exception e) {
             log.error(e.getMessage());
-            model.setStatusCode(HttpStatus.BAD_GATEWAY.value());
+            model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             model.setMessage(e.getMessage());
         }
         return model;
@@ -78,7 +88,7 @@ public class ArticleController {
             model.setData(articleService.loadAllArticle());
         } catch (Exception e) {
             log.error(e.getMessage());
-            model.setStatusCode(HttpStatus.BAD_GATEWAY.value());
+            model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             model.setMessage(e.getMessage());
         }
         return model;

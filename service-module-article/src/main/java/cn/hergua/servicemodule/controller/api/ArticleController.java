@@ -94,4 +94,31 @@ public class ArticleController {
         return model;
     }
 
+    @PostMapping("/delArticle")
+    public ResponseModel delArticle(Long articleId){
+        ResponseModel model = new ResponseModel();
+        try {
+            articleService.delArticleById(articleId);
+            model.setMessage("删除成功");
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            model.setMessage(e.getMessage());
+        }
+        return model;
+    }
+
+    @GetMapping("/getArticleByUserId")
+    public ResponseModel getArticleByUserId(Long userId){
+        ResponseModel model = new ResponseModel();
+        try {
+            model.setData(articleService.queryByUserId(userId));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            model.setMessage(e.getMessage());
+        }
+        return model;
+    }
+
 }

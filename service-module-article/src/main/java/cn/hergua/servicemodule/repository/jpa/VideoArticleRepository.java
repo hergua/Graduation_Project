@@ -4,6 +4,8 @@ import cn.hergua.servicemodule.domain.entity.VideoArticle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @Author Hergua
  * @Version 1.0
@@ -15,6 +17,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VideoArticleRepository extends JpaRepository<VideoArticle, Long> {
 
-
+    List<VideoArticle> queryByUserId(Long userId);
 
 }

@@ -56,7 +56,7 @@ public class TypeController {
         return model;
     }
 
-    @GetMapping("getTypes")
+    @GetMapping("/getTypes")
     public ResponseModel queryType(){
         ResponseModel model = new ResponseModel();
         try {

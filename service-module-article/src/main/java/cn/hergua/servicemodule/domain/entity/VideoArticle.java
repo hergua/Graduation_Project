@@ -27,6 +27,8 @@ public class VideoArticle implements Serializable {
     @JoinColumn(name = "typeId")
     private ArticleType type;
 
+    private String title;
+
     @Lob
     private String introduction;
 
@@ -42,6 +44,14 @@ public class VideoArticle implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getVideoUrl() {

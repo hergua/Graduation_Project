@@ -1,5 +1,7 @@
 package cn.hergua.servicemodule.service;
 
+import cn.hergua.servicemodule.domain.entity.Like;
+
 /**
  * @Author Hergua
  * @Version 1.0
@@ -9,4 +11,9 @@ package cn.hergua.servicemodule.service;
  * </p>
  */
 public interface LikeService {
+
+    void saveLike(Like like);
+
+    void delLike (Long id);
+
 }

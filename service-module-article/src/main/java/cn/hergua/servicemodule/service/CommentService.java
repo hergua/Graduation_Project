@@ -1,5 +1,9 @@
 package cn.hergua.servicemodule.service;
 
+import cn.hergua.servicemodule.domain.entity.Comment;
+
+import java.util.List;
+
 /**
  * @Author Hergua
  * @Version 1.0
@@ -9,4 +13,7 @@ package cn.hergua.servicemodule.service;
  * </p>
  */
 public interface CommentService {
+
+    List<Comment> queryByArticle(Long articleId);
+
 }

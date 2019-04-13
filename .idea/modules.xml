@@ -4,12 +4,20 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Graduation_Project.iml" filepath="$PROJECT_DIR$/.idea/Graduation_Project.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-register-center/eureka-register-center.iml" filepath="$PROJECT_DIR$/eureka-register-center/eureka-register-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-register-center/eureka-register-center.iml" filepath="$PROJECT_DIR$/eureka-register-center/eureka-register-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/git-config-sever/git-config-sever.iml" filepath="$PROJECT_DIR$/git-config-sever/git-config-sever.iml" />
       <module fileurl="file://$PROJECT_DIR$/git-config-sever/git-config-sever.iml" filepath="$PROJECT_DIR$/git-config-sever/git-config-sever.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-load-balance-gateway/module-load-balance-gateway.iml" filepath="$PROJECT_DIR$/module-load-balance-gateway/module-load-balance-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module-load-balance-gateway/module-load-balance-gateway.iml" filepath="$PROJECT_DIR$/module-load-balance-gateway/module-load-balance-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-module/service-module.iml" filepath="$PROJECT_DIR$/service-module/service-module.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-module/service-module.iml" filepath="$PROJECT_DIR$/service-module/service-module.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-module-article/service-module-article.iml" filepath="$PROJECT_DIR$/service-module-article/service-module-article.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-module-article/service-module-article.iml" filepath="$PROJECT_DIR$/service-module-article/service-module-article.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-module-micro-program/service-module-micro-program.iml" filepath="$PROJECT_DIR$/service-module-micro-program/service-module-micro-program.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-module-micro-program/service-module-micro-program.iml" filepath="$PROJECT_DIR$/service-module-micro-program/service-module-micro-program.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-module-picture/service-module-picture.iml" filepath="$PROJECT_DIR$/service-module-picture/service-module-picture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-module-picture/service-module-picture.iml" filepath="$PROJECT_DIR$/service-module-picture/service-module-picture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-module-video/service-module-video.iml" filepath="$PROJECT_DIR$/service-module-video/service-module-video.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-module-video/service-module-video.iml" filepath="$PROJECT_DIR$/service-module-video/service-module-video.iml" />
     </modules>
   </component>

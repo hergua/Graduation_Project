@@ -26,7 +26,9 @@ public class Comment implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Article.class, cascade = CascadeType.REFRESH)
     private Article article;
 
-    private Long referCommentId;
+    @JoinColumn(name = "referCommentId")
+    private Comment referComment;
+
 
     private Timestamp createTime;
 
@@ -67,13 +69,6 @@ public class Comment implements Serializable {
         this.article = article;
     }
 
-    public Long getReferCommentId() {
-        return referCommentId;
-    }
-
-    public void setReferCommentId(Long referCommentId) {
-        this.referCommentId = referCommentId;
-    }
 
     public Timestamp getCreateTime() {
         return createTime;
@@ -89,5 +84,13 @@ public class Comment implements Serializable {
 
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Comment getReferComment() {
+        return referComment;
+    }
+
+    public void setReferComment(Comment referComment) {
+        this.referComment = referComment;
     }
 }

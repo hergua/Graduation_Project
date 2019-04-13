@@ -1,30 +1,19 @@
 package cn.hergua.servicemodule.controller.api;
 
-import cn.hergua.servicemodule.constant.ResponseModel;
-import cn.hergua.servicemodule.service.LikeService;
+import cn.hergua.servicemodule.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @Author Hergua
- * @Version 1.0
- * @Date 2019/4/8
- * <p>
- *
- * </p>
- */
-
 @RefreshScope
 @RestController
-@RequestMapping("/like")
+@RequestMapping("/comment")
 @Slf4j
-public class LikeController {
+public class CommentController {
 
     @Autowired
-    LikeService service;
-
+    CommentService commentService;
 
 }

@@ -6,6 +6,7 @@ import cn.hergua.servicemodule.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -25,5 +26,22 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> queryByArticle(Long articleId) {
         return repository.findByArticle_IdOrderByCreateTimeDesc(articleId);
+    }
+
+    @Override
+    @Transactional
+    public void saveComment(Comment comment) {
+        repository.save(comment);
+    }
+
+    @Override
+    @Transactional
+    public void delComment(Long id) {
+        repository.deleteById(id);
+    }
+
+    @Override
+    public Comment queryById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 }

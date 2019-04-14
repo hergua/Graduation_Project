@@ -14,4 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface LikeRepository extends JpaRepository<Like, Long> {
+
+    int countByComment_Id(Long commentId);
+
 }

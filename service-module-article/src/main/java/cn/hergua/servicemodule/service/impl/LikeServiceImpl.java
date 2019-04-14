@@ -29,4 +29,9 @@ public class LikeServiceImpl implements LikeService {
     public void delLike(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public int countLike(Long commentId) {
+        return repository.countByComment_Id(commentId);
+    }
 }

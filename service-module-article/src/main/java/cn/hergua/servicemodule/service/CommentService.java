@@ -16,4 +16,10 @@ public interface CommentService {
 
     List<Comment> queryByArticle(Long articleId);
 
+    void saveComment(Comment comment);
+
+    void delComment(Long id);
+
+    Comment queryById(Long id);
+
 }

@@ -16,4 +16,6 @@ public interface LikeService {
 
     void delLike (Long id);
 
+    int countLike (Long commentId);
+
 }

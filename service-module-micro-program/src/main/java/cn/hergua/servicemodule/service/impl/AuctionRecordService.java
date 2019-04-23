@@ -1,9 +1,13 @@
 package cn.hergua.servicemodule.service.impl;
 
+import cn.hergua.servicemodule.domain.Auction;
 import cn.hergua.servicemodule.domain.AuctionRecord;
+import cn.hergua.servicemodule.domain.Goods;
 import cn.hergua.servicemodule.repository.AuctionRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author Hergua
@@ -25,6 +29,10 @@ public class AuctionRecordService {
 
     public int queryCountOfPayer(Long auctionId){
         return repository.queryCountOfPayer(auctionId);
+    }
+
+    public List<AuctionRecord> queryByGoods(Auction auction){
+        return repository.queryAuctionRecordByAuctionOrderByBidPrice(auction);
     }
 
 }

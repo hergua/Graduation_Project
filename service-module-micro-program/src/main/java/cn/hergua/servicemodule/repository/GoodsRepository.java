@@ -18,4 +18,6 @@ import java.util.List;
 public interface GoodsRepository extends JpaRepository<Goods, Long> {
 
     List<Goods> queryByUserId(Long userId);
+
+    List<Goods> queryByStatus(String status);
 }

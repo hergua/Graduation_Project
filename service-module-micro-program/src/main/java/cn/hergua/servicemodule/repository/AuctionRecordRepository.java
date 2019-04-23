@@ -28,5 +28,4 @@ public interface AuctionRecordRepository extends JpaRepository<AuctionRecord, Lo
     public List<AuctionRecord> queryAuctionRecordByAuctionOrderByBidPrice(Auction auction);
 
 
-
 }

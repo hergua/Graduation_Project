@@ -24,7 +24,14 @@ public class GoodsDescPicUrlService {
 
     public List<GoodsDescPicUrl> queryByGoodsIs(Goods goods){
         return repository.queryByGoods(goods);
+    }
 
+    public void saveGoodsPicUrl(GoodsDescPicUrl url){
+        repository.save(url);
+    }
+
+    public void delGoodsPicUrl(Long id){
+        repository.deleteById(id);
     }
 
 }

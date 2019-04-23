@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @RefreshScope
@@ -30,11 +32,17 @@ public class CommentController {
     @Autowired
     ArticleService articleService;
 
+    /**
+     * 通过文章ID获取所有评论信息，接口
+     * @param articleId 文章ID
+     * @return 接口返回信息
+     */
     @GetMapping("/getArticleComments")
     public ResponseModel getArticleComments(Long articleId){
         ResponseModel model = new ResponseModel();
         try{
             List<Comment> comments = commentService.queryByArticle(articleId);
+            comments.sort((o1, o2) -> o1.getCreateTime().getTime() > o2.getCreateTime().getTime() ? 0 : 1);
             model.setData(comments);
         }catch (Exception e){
             log.error(e.getMessage());

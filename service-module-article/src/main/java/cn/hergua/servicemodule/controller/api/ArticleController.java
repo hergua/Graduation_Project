@@ -38,6 +38,12 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
+    /**
+     * 保存文章接口
+     * @param typeId 类型的ID
+     * @param article 文章实体
+     * @return 接口执行信息
+     */
     @PostMapping("/saveArticle")
     public ResponseModel saveArticle(Long typeId, Article article){
         ResponseModel model = new ResponseModel();
@@ -82,6 +88,10 @@ public class ArticleController {
         return model;
     }
 
+    /**
+     * 获取所有的文章
+     * @return 接口返回信息，数据包括文章列表
+     */
     @GetMapping("/getAllArticle")
     public ResponseModel loadAllArticle(){
         ResponseModel model = new ResponseModel();

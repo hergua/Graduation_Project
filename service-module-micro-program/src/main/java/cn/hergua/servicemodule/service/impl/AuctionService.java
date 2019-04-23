@@ -6,6 +6,7 @@ import cn.hergua.servicemodule.repository.AuctionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ import java.util.List;
  * </p>
  */
 @Service
+@Transactional
 public class AuctionService {
 
     @Autowired
@@ -30,6 +32,14 @@ public class AuctionService {
 
     public List<Auction> queryAuctionsByType(String type){
         return repository.queryAuctionsByType(type);
+    }
+
+    public List<Auction> queryAllAuction(){
+        return repository.findAll();
+    }
+
+    public List<Auction> queryAuctionOnSailing(){
+        return repository.queryAuctionOnSailing();
     }
 
 }

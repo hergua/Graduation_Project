@@ -48,4 +48,13 @@ public class GoodsDescPicUrl implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public GoodsDescPicUrl() {
+    }
+
+    public GoodsDescPicUrl(Long id, Goods goods, String url) {
+        this.id = id;
+        this.goods = goods;
+        this.url = url;
+    }
 }

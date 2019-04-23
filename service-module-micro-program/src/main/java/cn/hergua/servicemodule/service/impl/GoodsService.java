@@ -28,6 +28,14 @@ public class GoodsService {
         repository.save(goods);
     }
 
+    public void updateGoods(Goods goods){
+        repository.saveAndFlush(goods);
+    }
+
+    public void delGoods(Long id){
+        repository.deleteById(id);
+    }
+
     public Goods queryByGoodsId(Long goodsId){
         return repository.findById(goodsId).orElse(null);
     }

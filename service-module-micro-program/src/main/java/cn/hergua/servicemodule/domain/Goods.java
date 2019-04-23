@@ -37,7 +37,7 @@ public class Goods  implements Serializable {
     private Integer goodsMount;
 
     /**
-     * 三种状态，在售，未出售，已售出
+     * 三种状态，2在售，1未出售，3已售出
      */
     private String status;
 

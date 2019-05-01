@@ -28,11 +28,19 @@ public class AuctionScheduledThreadPoolExecutor {
 
     private static List<Auction> auctionQueue = new ArrayList<>();
 
+    /**
+     * 为商品创建线程池用于计算商品的成交时间
+     * 独立开出五条线程每微秒钟计算商品的拍卖状态
+     */
     public AuctionScheduledThreadPoolExecutor() {
         scheduledThreadPool = new ScheduledThreadPoolExecutor(5);
-        scheduledThreadPool.schedule(this::scanAuctionSailStatus, 1, TimeUnit.SECONDS);
+        scheduledThreadPool.schedule(this::scanAuctionSailStatus, 1, TimeUnit.MICROSECONDS);
     }
 
+    /**
+     * 在此方法内进行商品状态判断
+     * @return 每个微妙对商品状态进行计算
+     */
     @Bean
     public Runnable scanAuctionSailStatus(){
         return () -> {
@@ -42,6 +50,7 @@ public class AuctionScheduledThreadPoolExecutor {
                     Goods delayGoods = auction.getGoods();
                     delayGoods.setStatus("3");
                     goodsService.updateGoods(delayGoods);
+                    auctionQueue.remove(auction);
                 }
             });
         };

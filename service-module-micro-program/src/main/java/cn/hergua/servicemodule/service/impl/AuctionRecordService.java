@@ -35,4 +35,8 @@ public class AuctionRecordService {
         return repository.queryAuctionRecordByAuctionOrderByBidPrice(auction);
     }
 
+    public List<AuctionRecord> queryByUserId(Long userId){
+        return repository.queryByUserId(userId);
+    }
+
 }

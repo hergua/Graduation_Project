@@ -73,7 +73,15 @@ public class AuctionRecordController {
 
     @GetMapping("/queryRecordByUser")
     public ResponseModel queryRecordByUser(Long userId){
-        return null;
+        ResponseModel model = new ResponseModel();
+        try{
+            model.setData(recordService.queryByUserId(userId));
+        }catch (Exception e){
+            log.error(e.getMessage());
+            model.setMessage(e.getMessage());
+            model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        }
+        return model;
     }
 
 

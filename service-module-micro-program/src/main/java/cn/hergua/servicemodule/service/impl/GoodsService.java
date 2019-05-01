@@ -18,6 +18,7 @@ import java.util.Objects;
  * </p>
  */
 @Service
+@Transactional
 public class GoodsService {
 
     @Autowired

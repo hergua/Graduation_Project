@@ -3,13 +3,21 @@ server:
 
 #router to url
 #config the route to mapping path
-#zuul:
-#  routes:
-#    api-service-module:
-#      path: /service-module/**
-#      serviceId: PERIPHERAL-MALL-SERVICE-MODULE
+zuul:
+  routes:
+    article-service-module:
+      path: /SERVICE-MODULE-ARTICLE/**
+      serviceId: SERVICE-MODULE-ARTICLE
 
-#endpoints:
-#  routes:
-#    sensitive: false
+endpoints:
+  routes:
+    sensitive: false
 
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+oauth2:
+  ribbon:
+    ReadTimeout: 20000
+    ConnectTimeout: 20000

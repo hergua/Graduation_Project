@@ -14,7 +14,7 @@ public class QiNiuMedia {
     public static final String ACCESSKEY = "iK_pM9aLioR5k3tB_r2oYNuerxn_hA8kcyE8PBiX";
     public static final String SECRETKEY = "JFwZbldp7sDzAxvxTJSD2yB7-tUdiuLKsEGlsqoi";
     public static final String BUCKETNAME = "picture_server";
-    public static final String DOMAIN = "popf2cli9.bkt.clouddn.com/";
+    public static final String DOMAIN = "http://file.hergua.cn/";
     private String accessKey;
     private String secretKey;
     private String bucketName;

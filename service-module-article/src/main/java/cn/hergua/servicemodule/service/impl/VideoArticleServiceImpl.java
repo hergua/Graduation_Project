@@ -39,7 +39,7 @@ public class VideoArticleServiceImpl implements VideoArticleService {
 
     @Override
     public List<VideoArticle> queryAllVideoArticle() {
-        return repository.findAll();
+        return repository.queryByStatusOrderByCreateTimeDesc((byte) 1);
     }
 
     @Override
@@ -50,5 +50,10 @@ public class VideoArticleServiceImpl implements VideoArticleService {
     @Override
     public VideoArticle queryById(Long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<VideoArticle> queryWithoutPermit() {
+        return repository.queryByStatusOrderByCreateTimeDesc((byte) 0);
     }
 }

@@ -39,7 +39,7 @@ public class QiniuMediaUtilService {
 
     private static final String BUCK_NAME = "picture_server";
 
-    private static final String IMAGE_DOMAIN = "popf2cli9.bkt.clouddn.com/";
+    private static final String IMAGE_DOMAIN = "file.hergua.cn/";
 
 
     private Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);

@@ -1,9 +1,9 @@
 #publickey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAK/0YWAoLWtrRcqA5NnmgxRmeyWRSnZzyxCWYWxHm9qk4LxtpyLNz1OkkYuTdUajbERuN1L68S0xHewVNv6elOcCAwEAAQ==
 
 
-#spring:
-#  application:
-#    name: service-module-article
+spring:
+  application:
+    name: service-module-article
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 #    url: jdbc:mysql://hergua.cn:3306/evaluation

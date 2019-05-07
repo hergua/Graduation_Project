@@ -47,6 +47,11 @@ public class VideoArticleController {
                 throw new Exception("保存视频文章：传入参数错误，存在空值");
 
             }
+            if (videoArticle.getUserId() == 1L){
+                videoArticle.setStatus((byte) 1);
+            }else {
+                videoArticle.setStatus((byte) 0);
+            }
             videoArticle.setId(new SnowFlake().nextId());
             videoArticle.setCreateTime(new Timestamp(System.currentTimeMillis()));
             videoArticle.setType(new ArticleType(typeId));
@@ -64,13 +69,18 @@ public class VideoArticleController {
     public ResponseModel updateVideoArticle(Long typeId, VideoArticle videoArticle){
         ResponseModel model = new ResponseModel();
         try {
-            videoArticle.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-            videoArticle.setType(new ArticleType(typeId));
+            VideoArticle oldArticle = service.queryById(videoArticle.getId());
+            oldArticle.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            oldArticle.setType(new ArticleType(typeId));
             if (StringUtils.isAnyBlank(videoArticle.getVideoUrl(),videoArticle.getIntroduction(),videoArticle.getTitle()) ||
-                    videoArticle.getUserId() == null || typeId == null || videoArticle.getId() == null){
+                     typeId == null || videoArticle.getId() == null){
                 throw new RuntimeException("保存文章，传入参数错误，存在空值");
             }
-            service.update(videoArticle);
+            oldArticle.setHeadPictureUrl(videoArticle.getHeadPictureUrl());
+            oldArticle.setIntroduction(videoArticle.getIntroduction());
+            oldArticle.setTitle(videoArticle.getTitle());
+            oldArticle.setVideoUrl(videoArticle.getVideoUrl());
+            service.update(oldArticle);
             log.info("article: "+videoArticle.getId()+" update success by user: "+videoArticle.getUserId());
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -111,6 +121,19 @@ public class VideoArticleController {
         ResponseModel model = new ResponseModel();
         try {
             model.setData(service.queryVideoByUserId(userId));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            model.setMessage(e.getMessage());
+        }
+        return model;
+    }
+
+    @GetMapping("/getWithoutPermitVideo")
+    public ResponseModel getWithoutPermitVideo(){
+        ResponseModel model = new ResponseModel();
+        try {
+            model.setData(service.queryWithoutPermit());
         } catch (Exception e) {
             log.error(e.getMessage());
             model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());

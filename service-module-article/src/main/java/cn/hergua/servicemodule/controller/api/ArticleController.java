@@ -53,6 +53,11 @@ public class ArticleController {
                 throw new Exception("保存文章，传入参数错误，存在空值");
 
             }
+            if (article.getUserId() == 1){
+                article.setStatus((byte) 1);
+            }else {
+                article.setStatus((byte) 0);
+            }
             article.setId(new SnowFlake().nextId());
             ArticleType type = new ArticleType(typeId);
             article.setCreateTime(new Timestamp(System.currentTimeMillis()));
@@ -71,14 +76,19 @@ public class ArticleController {
     public ResponseModel updateArticle(Long typeId, Article article){
         ResponseModel model = new ResponseModel();
         try {
+            Article oldArticle = articleService.queryById(article.getId());
             ArticleType type = new ArticleType(typeId);
-            article.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-            article.setArticleType(type);
+            oldArticle.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+            oldArticle.setArticleType(type);
             if (StringUtils.isAnyBlank(article.getContent(),article.getIntroduction(),article.getTitle()) ||
-            article.getUserId() == null || typeId == null || article.getId() == null){
+             typeId == null || article.getId() == null){
                 throw new RuntimeException("保存文章，传入参数错误，存在空值");
             }
-            articleService.updateArticle(article);
+            oldArticle.setContent(article.getContent());
+            oldArticle.setHeadPictureUrl(article.getHeadPictureUrl());
+            oldArticle.setIntroduction(article.getIntroduction());
+            oldArticle.setTitle(article.getTitle());
+            articleService.updateArticle(oldArticle);
             log.info("article: "+article.getId()+" update success by user: "+article.getUserId());
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -97,6 +107,19 @@ public class ArticleController {
         ResponseModel model = new ResponseModel();
         try {
             model.setData(articleService.loadAllArticle());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            model.setMessage(e.getMessage());
+        }
+        return model;
+    }
+
+    @GetMapping("/getWithoutPermitArticle")
+    public ResponseModel getWithoutPermitArticle(){
+        ResponseModel model = new ResponseModel();
+        try {
+            model.setData(articleService.getWithoutPermissionArticles());
         } catch (Exception e) {
             log.error(e.getMessage());
             model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());

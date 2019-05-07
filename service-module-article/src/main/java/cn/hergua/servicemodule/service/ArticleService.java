@@ -26,4 +26,6 @@ public interface ArticleService {
 
     List<Article> loadAllArticle();
 
+    List<Article> getWithoutPermissionArticles();
+
 }

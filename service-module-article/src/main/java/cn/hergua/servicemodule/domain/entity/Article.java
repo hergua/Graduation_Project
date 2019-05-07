@@ -40,6 +40,16 @@ public class Article implements Serializable {
 
     private Timestamp updateTime;
 
+    private byte status;
+
+    public byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(byte status) {
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }

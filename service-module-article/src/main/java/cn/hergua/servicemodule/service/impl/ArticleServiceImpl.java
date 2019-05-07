@@ -52,4 +52,9 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> loadAllArticle() {
         return repository.findAllOrderByCreateTime();
     }
+
+    @Override
+    public List<Article> getWithoutPermissionArticles() {
+        return repository.findByStatusOrderByCreateTimeDesc((byte) 0);
+    }
 }

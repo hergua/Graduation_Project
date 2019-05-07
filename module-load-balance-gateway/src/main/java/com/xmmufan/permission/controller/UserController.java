@@ -13,7 +13,6 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -28,8 +27,7 @@ import java.util.Arrays;
  */
 
 @RestController
-@RequestMapping(path = "/user",
-        produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(path = "/user")
 @Slf4j
 public class UserController extends BaseRestController {
 

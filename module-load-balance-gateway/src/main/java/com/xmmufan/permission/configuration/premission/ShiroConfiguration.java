@@ -56,8 +56,9 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/user/subLogin","anon");
-        sysPermissionService.findAllPermissions().forEach(sysPermission -> filterChainDefinitionMap.put(sysPermission.getUrl(),
-                "authc, perms["+sysPermission.getPermission()+"]"));
+        filterChainDefinitionMap.put("/user/addUser","anon");
+//        sysPermissionService.findAllPermissions().forEach(sysPermission -> filterChainDefinitionMap.put(sysPermission.getUrl(),
+//                "authc, perms["+sysPermission.getPermission()+"]"));
         filterChainDefinitionMap.put("/**", "anon");
         shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");

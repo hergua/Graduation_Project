@@ -35,6 +35,26 @@ public class UserInfo {
 
     private String email;
 
+    private String location;
+
+    private String headPicture;
+
+    public String getHeadPicture() {
+        return headPicture;
+    }
+
+    public void setHeadPicture(String headPicture) {
+        this.headPicture = headPicture;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     public Long getId() {
         return id;
     }

@@ -19,4 +19,6 @@ public interface VideoArticleRepository extends JpaRepository<VideoArticle, Long
 
     List<VideoArticle> queryByUserId(Long userId);
 
+    List<VideoArticle> queryByStatusOrderByCreateTimeDesc(byte status);
+
 }

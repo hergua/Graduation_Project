@@ -2,7 +2,7 @@ spring:
   application:
     name: service-module-video
 server:
-  port: 9000
+  port: 5000
 
 eureka:
   client:

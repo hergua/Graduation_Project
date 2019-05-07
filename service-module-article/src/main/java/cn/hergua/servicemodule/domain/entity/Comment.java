@@ -27,7 +27,8 @@ public class Comment implements Serializable {
     private Article article;
 
     @JoinColumn(name = "referCommentId")
-    private Comment referComment;
+    @Lob
+    private Comment referComment = null;
 
 
     private Timestamp createTime;

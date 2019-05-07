@@ -43,6 +43,7 @@ public class CommentController {
         try{
             List<Comment> comments = commentService.queryByArticle(articleId);
             comments.sort((o1, o2) -> o1.getCreateTime().getTime() > o2.getCreateTime().getTime() ? 0 : 1);
+            comments = removeArticle(comments);
             model.setData(comments);
         }catch (Exception e){
             log.error(e.getMessage());
@@ -62,7 +63,11 @@ public class CommentController {
             comment.setId(new SnowFlake().nextId());
             comment.setCreateTime(new Timestamp(System.currentTimeMillis()));
             if (referId != null && referId != 0){
-                comment.setReferComment(commentService.queryById(referId));
+                Comment referComment = commentService.queryById(referId);
+                if (referComment != null){
+                    referComment.setReferComment(null);
+                }
+                comment.setReferComment(referComment);
             }
             commentService.saveComment(comment);
         }catch (Exception e){
@@ -78,7 +83,7 @@ public class CommentController {
         ResponseModel model = new ResponseModel();
         try{
             if (id != null){
-                articleService.delArticleById(id);
+                commentService.delComment(id);
             }
         }catch (Exception e){
             log.error(e.getMessage());
@@ -88,5 +93,15 @@ public class CommentController {
         return model;
     }
 
-
+    private List<Comment> removeArticle(List<Comment> comments){
+        if (comments != null){
+            comments.forEach(comment -> {
+                comment.setArticle(null);
+                if (comment.getReferComment() != null){
+                    comment.getReferComment().setArticle(null);
+                }
+            });
+        }
+        return comments;
+    }
 }

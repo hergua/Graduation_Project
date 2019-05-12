@@ -155,6 +155,19 @@ public class VideoArticleController {
         return model;
     }
 
+    @GetMapping("/queryUnPermitVideoArticleByUser")
+    public ResponseModel queryUnPermitVideoArticleByUser(Long userId){
+        ResponseModel model = new ResponseModel();
+        try {
+            model.setData(service.queryWithoutPermit(userId));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            model.setMessage(e.getMessage());
+        }
+        return model;
+    }
+
 
 
 

@@ -6,6 +6,7 @@ package cn.hergua.servicemodule.constant;
 public class SnowFlake {
 
 
+    public final static SnowFlake FLAKE = new SnowFlake();
     /**
      * 起始的时间戳
      */

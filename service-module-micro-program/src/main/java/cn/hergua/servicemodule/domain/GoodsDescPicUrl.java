@@ -1,5 +1,7 @@
 package cn.hergua.servicemodule.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -21,6 +23,7 @@ public class GoodsDescPicUrl implements Serializable {
 
     @JoinColumn(name = "goodsId")
     @ManyToOne(targetEntity = Goods.class, cascade = CascadeType.REFRESH)
+    @JsonIgnore
     private Goods goods;
 
     private String url;

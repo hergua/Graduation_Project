@@ -17,7 +17,7 @@ import java.util.List;
  *
  * </p>
  */
-@Repository
+@Repository("AuctionRepository")
 public interface AuctionRepository extends JpaRepository<Auction, Long> {
 
     public Auction queryByGoods(Goods goods);

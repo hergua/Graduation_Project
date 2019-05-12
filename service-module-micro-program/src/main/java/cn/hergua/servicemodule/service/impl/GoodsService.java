@@ -2,6 +2,7 @@ package cn.hergua.servicemodule.service.impl;
 
 import cn.hergua.servicemodule.domain.Goods;
 import cn.hergua.servicemodule.repository.GoodsRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +20,12 @@ import java.util.Objects;
  */
 @Service
 @Transactional
+@Slf4j
 public class GoodsService {
 
     @Autowired
     GoodsRepository repository;
 
-    @Transactional
     public void saveGoods(Goods goods){
         repository.save(goods);
     }

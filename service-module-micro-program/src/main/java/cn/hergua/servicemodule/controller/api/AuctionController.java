@@ -34,9 +34,6 @@ public class AuctionController {
     @Autowired
     GoodsService goodsService;
 
-    @Autowired
-    AuctionScheduledThreadPoolExecutor poolExecutor;
-
     @PostMapping("/createAuction")
     public ResponseModel createAuction(Auction auction, Long goodsId){
         ResponseModel model = new ResponseModel();
@@ -50,9 +47,11 @@ public class AuctionController {
             }
             goods.setStatus("2");
             auction.setId(new SnowFlake().nextId());
+            auction.setCurrentPrice(auction.getStartingPrice());
             auction.setGoods(goods);
+
             auctionService.saveAuction(auction);
-            poolExecutor.addAuctionToQueue(auction);
+            AuctionScheduledThreadPoolExecutor.addAuctionToQueue(auction);
             log.info("the application for auction create success, goodsId:"+ goodsId);
         } catch (Exception e) {
             model.setMessage(e.getMessage());
@@ -108,11 +107,5 @@ public class AuctionController {
         }
         return model;
     }
-
-    public void aucitonQueue(Auction auction){
-
-    }
-
-
 
 }

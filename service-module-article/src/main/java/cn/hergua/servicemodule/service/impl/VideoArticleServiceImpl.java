@@ -56,4 +56,9 @@ public class VideoArticleServiceImpl implements VideoArticleService {
     public List<VideoArticle> queryWithoutPermit() {
         return repository.queryByStatusOrderByCreateTimeDesc((byte) 0);
     }
+
+    @Override
+    public List<VideoArticle> queryWithoutPermit(Long userId) {
+        return repository.queryByStatusAndUserIdOrderByCreateTimeDesc((byte) 0,userId);
+    }
 }

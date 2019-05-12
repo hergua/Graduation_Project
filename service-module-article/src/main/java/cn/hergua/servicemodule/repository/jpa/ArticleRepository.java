@@ -24,4 +24,6 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     List<Article> findAllOrderByCreateTime();
 
     List<Article> findByStatusOrderByCreateTimeDesc(byte status);
+
+    List<Article> queryByStatusAndUserIdOrderByCreateTimeDesc(byte status, Long userId);
 }

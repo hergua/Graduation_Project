@@ -20,11 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class UserInfoController {
 
-    @Autowired
-    private UserInfoService userInfoService;
+    private final UserInfoService userInfoService;
+
+    private final UserService userService;
 
     @Autowired
-    private UserService userService;
+    public UserInfoController(UserInfoService userInfoService, UserService userService) {
+        this.userInfoService = userInfoService;
+        this.userService = userService;
+    }
 
     @PostMapping("/saveOrUpdateUserInfo")
     public ResponseModel saveUserInfo(UserInfo userInfo, Long userId) {

@@ -57,4 +57,9 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getWithoutPermissionArticles() {
         return repository.findByStatusOrderByCreateTimeDesc((byte) 0);
     }
+
+    @Override
+    public List<Article> getWithoutPermissionArticlesByUser(Long userId) {
+        return repository.queryByStatusAndUserIdOrderByCreateTimeDesc((byte) 0,userId);
+    }
 }

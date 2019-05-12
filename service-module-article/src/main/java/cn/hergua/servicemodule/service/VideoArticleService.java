@@ -28,4 +28,6 @@ public interface VideoArticleService {
 
     List<VideoArticle> queryWithoutPermit();
 
+    List<VideoArticle> queryWithoutPermit(Long userId);
+
 }

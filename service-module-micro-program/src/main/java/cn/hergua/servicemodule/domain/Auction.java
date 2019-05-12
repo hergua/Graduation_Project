@@ -1,6 +1,8 @@
 package cn.hergua.servicemodule.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -36,6 +38,7 @@ public class Auction implements Serializable {
     private BigDecimal currentPrice;
 
     @OneToMany(mappedBy = "auction", targetEntity = AuctionRecord.class, cascade = CascadeType.REFRESH)
+    @JsonIgnore
     private List<AuctionRecord> records;
 
     private Timestamp transactionTime;

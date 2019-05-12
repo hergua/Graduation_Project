@@ -28,4 +28,6 @@ public interface ArticleService {
 
     List<Article> getWithoutPermissionArticles();
 
+    List<Article> getWithoutPermissionArticlesByUser(Long userId);
+
 }

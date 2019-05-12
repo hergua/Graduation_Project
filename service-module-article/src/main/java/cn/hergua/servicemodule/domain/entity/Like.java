@@ -1,5 +1,7 @@
 package cn.hergua.servicemodule.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -24,6 +26,7 @@ public class Like implements Serializable {
 
     @JoinColumn(name = "commentId")
     @ManyToOne(targetEntity = Comment.class, cascade = CascadeType.REFRESH)
+    @JsonIgnore
     private Comment comment;
 
     private Timestamp createTime;

@@ -1,5 +1,7 @@
 package cn.hergua.servicemodule.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -24,6 +26,7 @@ public class Comment implements Serializable {
 
     @JoinColumn(name = "toArticleId")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Article.class, cascade = CascadeType.REFRESH)
+    @JsonIgnore
     private Article article;
 
     @JoinColumn(name = "referCommentId")

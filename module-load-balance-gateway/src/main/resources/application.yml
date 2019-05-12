@@ -8,6 +8,9 @@ zuul:
     article-service-module:
       path: /SERVICE-MODULE-ARTICLE/**
       serviceId: SERVICE-MODULE-ARTICLE
+    micro-mall-service-module:
+      path: /SERVICE-MODULE-MICRO-PROGRAM/**
+      serviceId: SERVICE-MODULE-MICRO-PROGRAM
 
 endpoints:
   routes:

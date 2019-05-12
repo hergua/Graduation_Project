@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 @RestController
 @Slf4j
-@RequestMapping("/auction")
+@RequestMapping("/goodsPic")
 @RefreshScope
 public class GoodsPicController {
 
@@ -34,7 +34,6 @@ public class GoodsPicController {
     GoodsService goodsService;
 
     @PostMapping("/savePicUrl")
-    @Transactional
     public ResponseModel savePic(Long goodsId, String url){
         ResponseModel model = new ResponseModel();
         try {
@@ -43,10 +42,10 @@ public class GoodsPicController {
                 throw new RuntimeException("goodsId or picture url cannot be null");
             }
             String [] urls = url.split(",");
-            for (String singleUrl : urls) {
-                GoodsDescPicUrl picUrl = new GoodsDescPicUrl(new SnowFlake().nextId(), goods, singleUrl);
-                picUrlService.saveGoodsPicUrl(picUrl);
-            }
+//            for (String singleUrl : urls) {
+//                GoodsDescPicUrl picUrl = new GoodsDescPicUrl(new SnowFlake().nextId(), singleUrl);
+//                picUrlService.saveGoodsPicUrl(picUrl);
+//            }
         } catch (Exception e) {
             log.error(e.getMessage());
             model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
@@ -56,7 +55,6 @@ public class GoodsPicController {
     }
 
     @GetMapping("/delPicUrl")
-    @Transactional
     public ResponseModel delPic(Long id){
         ResponseModel model = new ResponseModel();
         try {

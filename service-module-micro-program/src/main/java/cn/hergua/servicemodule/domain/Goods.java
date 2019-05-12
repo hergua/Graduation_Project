@@ -1,5 +1,7 @@
 package cn.hergua.servicemodule.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -22,6 +24,7 @@ public class Goods  implements Serializable {
     @Id
     private Long id;
 
+    @JsonIgnore
     private Long articleId;
 
     private Long userId;
@@ -122,5 +125,12 @@ public class Goods  implements Serializable {
 
     public void setIntroduce(String introduce) {
         this.introduce = introduce;
+    }
+
+    public Goods(Long id) {
+        this.id = id;
+    }
+
+    public Goods() {
     }
 }

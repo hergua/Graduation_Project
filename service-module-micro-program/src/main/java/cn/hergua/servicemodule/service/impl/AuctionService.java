@@ -4,6 +4,7 @@ import cn.hergua.servicemodule.domain.Auction;
 import cn.hergua.servicemodule.domain.Goods;
 import cn.hergua.servicemodule.repository.AuctionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

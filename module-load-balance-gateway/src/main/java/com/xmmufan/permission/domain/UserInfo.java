@@ -1,8 +1,10 @@
 package com.xmmufan.permission.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xmmufan.permission.domain.permission.User;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -23,6 +25,7 @@ public class UserInfo {
 
     @OneToOne(targetEntity = User.class,cascade = CascadeType.REFRESH)
     @JoinColumn(name = "userId")
+    @JsonIgnore
     private User user;
 
     private String nickName;
@@ -31,7 +34,7 @@ public class UserInfo {
 
     private String sign;
 
-    private Timestamp birthday;
+    private Date birthday;
 
     private String email;
 
@@ -95,11 +98,11 @@ public class UserInfo {
         this.sign = sign;
     }
 
-    public Timestamp getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Timestamp birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

@@ -1,5 +1,6 @@
 package cn.hergua.servicemodule.service;
 
+import cn.hergua.servicemodule.domain.entity.Comment;
 import cn.hergua.servicemodule.domain.entity.Like;
 
 /**
@@ -17,5 +18,9 @@ public interface LikeService {
     void delLike (Long id);
 
     int countLike (Long commentId);
+
+    boolean isLike(Long userId, Long commentId);
+
+    Like queryCurrentLike(Long userId, Comment comment);
 
 }

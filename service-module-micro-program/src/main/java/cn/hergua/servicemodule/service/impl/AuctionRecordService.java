@@ -7,6 +7,7 @@ import cn.hergua.servicemodule.repository.AuctionRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -37,6 +38,10 @@ public class AuctionRecordService {
 
     public List<AuctionRecord> queryByUserId(Long userId){
         return repository.queryByUserId(userId);
+    }
+
+    public BigDecimal getLastestPrice(Long auctionId){
+        return repository.getLastestPrice(auctionId);
     }
 
 }

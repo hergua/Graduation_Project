@@ -3,9 +3,14 @@ package cn.hergua.servicemodule.controller.api;
 
 import cn.hergua.servicemodule.constant.ResponseModel;
 import cn.hergua.servicemodule.constant.SnowFlake;
+import cn.hergua.servicemodule.domain.Auction;
+import cn.hergua.servicemodule.domain.AuctionRecord;
 import cn.hergua.servicemodule.domain.Goods;
 import cn.hergua.servicemodule.domain.GoodsDescPicUrl;
+import cn.hergua.servicemodule.domain.vo.GoodsAuctionVo;
 import cn.hergua.servicemodule.repository.GoodsRepository;
+import cn.hergua.servicemodule.service.impl.AuctionRecordService;
+import cn.hergua.servicemodule.service.impl.AuctionService;
 import cn.hergua.servicemodule.service.impl.GoodsDescPicUrlService;
 import cn.hergua.servicemodule.service.impl.GoodsService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +18,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +36,12 @@ public class GoodsController {
 
     @Autowired
     private GoodsDescPicUrlService urlService;
+
+    @Autowired
+    private AuctionService auctionService;
+
+    @Autowired
+    private AuctionRecordService recordService;
 
     @PostMapping("/saveGoods")
     public ResponseModel saveGoods(Goods goods, String urlStrings) {
@@ -126,6 +138,25 @@ public class GoodsController {
             result.put("sailed", sailed);
             result.put("failed", failed);
             model.setData(result);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            model.setMessage(e.getMessage());
+            model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        }
+        return model;
+    }
+
+    @GetMapping("/queryAuctionInfoByGoods")
+    public ResponseModel queryAuctionInfoByGoods(Long goodsId){
+        ResponseModel model = new ResponseModel();
+        try {
+            Goods goods = service.queryByGoodsId(goodsId);
+            Auction auction = auctionService.queryAuctionByGoodsId(goods);
+            GoodsAuctionVo vo = new GoodsAuctionVo(auction);
+            vo.setAuctionTimes(recordService.queryByGoods(auction).size());
+            vo.setBidderNumber(recordService.queryCountOfPayer(auction.getId()));
+            vo.setDealPrice(recordService.getLastestPrice(auction.getId()));
+            model.setData(vo);
         } catch (Exception e) {
             log.error(e.getMessage());
             model.setMessage(e.getMessage());

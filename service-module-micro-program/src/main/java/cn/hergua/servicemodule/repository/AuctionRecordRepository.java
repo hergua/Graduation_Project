@@ -29,4 +29,7 @@ public interface AuctionRecordRepository extends JpaRepository<AuctionRecord, Lo
 
     public List<AuctionRecord> queryByUserId(Long userId);
 
+    @Query(value = "select max(bid_price) from tab_auction_record where auction_id = :auctionId", nativeQuery = true)
+    BigDecimal getLastestPrice(Long auctionId);
+
 }

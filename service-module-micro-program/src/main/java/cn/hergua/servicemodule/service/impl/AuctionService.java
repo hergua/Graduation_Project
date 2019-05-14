@@ -43,4 +43,8 @@ public class AuctionService {
         return repository.queryAuctionOnSailing();
     }
 
+    public void update(Auction auction){
+        repository.saveAndFlush(auction);
+    }
+
 }

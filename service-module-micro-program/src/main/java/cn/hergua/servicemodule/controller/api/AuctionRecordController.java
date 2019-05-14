@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -40,12 +41,14 @@ public class AuctionRecordController {
     public ResponseModel saveRecord(AuctionRecord record, Long goodsId){
         ResponseModel model = new ResponseModel();
         try{
-
             record.setId(new SnowFlake().nextId());
             Goods goods = goodsService.queryByGoodsId(goodsId);
             Auction auction = auctionService.queryAuctionByGoodsId(goods);
             record.setAuction(auction);
+            record.setCreateTime(new Timestamp(System.currentTimeMillis()));
+            auction.setCurrentPrice(record.getBidPrice());
             recordService.saveAuctionRecord(record);
+            auctionService.update(auction);
             log.info("record saved success by user : " + record.getUserId());
         }catch (Exception e){
             log.error(e.getMessage());

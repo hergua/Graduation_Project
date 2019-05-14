@@ -51,12 +51,11 @@ public class AuctionController {
             auction.setGoods(goods);
 
             auctionService.saveAuction(auction);
-            AuctionScheduledThreadPoolExecutor.addAuctionToQueue(auction);
             log.info("the application for auction create success, goodsId:"+ goodsId);
         } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
             model.setMessage(e.getMessage());
             model.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-            e.printStackTrace();
         }
         return model;
     }

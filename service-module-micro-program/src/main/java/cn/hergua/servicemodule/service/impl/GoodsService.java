@@ -32,6 +32,7 @@ public class GoodsService {
 
     public void updateGoods(Goods goods){
         repository.saveAndFlush(goods);
+        log.info("update right now");
     }
 
     public void delGoods(Long id){

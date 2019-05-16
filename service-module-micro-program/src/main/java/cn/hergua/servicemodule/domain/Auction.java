@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -41,7 +43,7 @@ public class Auction implements Serializable {
     @JsonIgnore
     private List<AuctionRecord> records;
 
-    private Date transactionTime;
+    private Timestamp transactionTime;
 
     public Long getId() {
         return id;
@@ -99,11 +101,11 @@ public class Auction implements Serializable {
         this.records = records;
     }
 
-    public Date getTransactionTime() {
+    public Timestamp getTransactionTime() {
         return transactionTime;
     }
 
-    public void setTransactionTime(Date transactionTime) {
+    public void setTransactionTime(Timestamp transactionTime) {
         this.transactionTime = transactionTime;
     }
 }

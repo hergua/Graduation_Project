@@ -158,7 +158,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>module-name</finalName>
+        <finalName>video-module</finalName>
     </build>
 
 

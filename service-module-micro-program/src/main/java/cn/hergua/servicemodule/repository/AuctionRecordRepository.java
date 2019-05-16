@@ -23,11 +23,11 @@ import java.util.List;
 public interface AuctionRecordRepository extends JpaRepository<AuctionRecord, Long> {
 
     @Query(value = "SELECT COUNT(DISTINCT USER_ID) FROM tab_auction_record WHERE AUCTION_ID = :auctionId ",nativeQuery = true)
-    public int queryCountOfPayer(@Param("auctionId") Long auctionId);
+    int queryCountOfPayer(@Param("auctionId") Long auctionId);
 
-    public List<AuctionRecord> queryAuctionRecordByAuctionOrderByBidPrice(Auction auction);
+    List<AuctionRecord> queryAuctionRecordByAuctionOrderByBidPrice(Auction auction);
 
-    public List<AuctionRecord> queryByUserId(Long userId);
+    List<AuctionRecord> queryByUserId(Long userId);
 
     @Query(value = "select max(bid_price) from tab_auction_record where auction_id = :auctionId", nativeQuery = true)
     BigDecimal getLastestPrice(Long auctionId);

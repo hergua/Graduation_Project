@@ -83,7 +83,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>module-name</finalName>
+        <finalName>git-config</finalName>
     </build>
 
 

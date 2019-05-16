@@ -164,7 +164,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>module-name</finalName>
+        <finalName>micro-program</finalName>
     </build>
 
 

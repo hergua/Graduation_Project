@@ -9,7 +9,6 @@
         <module name="eureka-register-center" />
         <module name="git-config-sever" />
         <module name="module-load-balance-gateway" />
-        <module name="service-module" />
         <module name="service-module-article" />
         <module name="service-module-micro-program" />
         <module name="service-module-picture" />

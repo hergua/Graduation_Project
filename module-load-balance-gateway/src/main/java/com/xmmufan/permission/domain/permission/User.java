@@ -1,6 +1,7 @@
 package com.xmmufan.permission.domain.permission;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xmmufan.permission.domain.UserInfo;
 
 import javax.persistence.*;
@@ -29,16 +30,19 @@ public class User implements Serializable {
     /**
      * 名称
      */
+    @JsonIgnore
     private String name;
 
     /**
      * 密码
      */
+    @JsonIgnore
     private String password;
 
     /**
      * 盐值
      */
+    @JsonIgnore
     private String salt;
 
     /**
@@ -52,6 +56,7 @@ public class User implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "SysUserRole", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "roleId")})
+    @JsonIgnore
     private List<SysRole> roleList;
 
 

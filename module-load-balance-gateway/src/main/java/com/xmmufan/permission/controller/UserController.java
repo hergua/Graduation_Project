@@ -4,6 +4,7 @@ import com.xmmufan.permission.aspect.EncryptedPasswordAndSalt;
 import com.xmmufan.permission.constant.http.HttpStatusCode;
 import com.xmmufan.permission.constant.exception.AccountInfoMissingException;
 import com.xmmufan.permission.constant.http.ResponseModel;
+import com.xmmufan.permission.constant.permission.AccountState;
 import com.xmmufan.permission.domain.permission.User;
 import com.xmmufan.permission.domain.vo.UserInfoVo;
 import com.xmmufan.permission.service.UserService;
@@ -113,7 +114,7 @@ public class UserController extends BaseRestController {
         return model;
     }
 
-    @PutMapping(value = "/updateUser")
+    @PostMapping(value = "/updateUser")
     @EncryptedPasswordAndSalt
     public ResponseModel updateUser(User user) {
         ResponseModel model = new ResponseModel();
@@ -122,6 +123,67 @@ public class UserController extends BaseRestController {
                 throw new AccountInfoMissingException("用户名或密码缺失");
             }
             userService.updateUser(user);
+        } catch (Exception e) {
+            model.setStatusCode(HttpStatusCode.INTERNAL_SERVER_ERROR);
+            model.setMessage("服务器内部出错");
+        }
+        return model;
+    }
+
+    /**
+     * @Description: 锁定账户
+     * @Param: [userId, status]
+     * @return: com.xmmufan.project.constant.http.ResponseModel
+     * @Author: Mr.Hergua
+     * @Date: 2018/11/13
+     */
+    @PostMapping(value = "/lockAccount")
+    public ResponseModel lockAccount(String username) {
+        ResponseModel model = new ResponseModel();
+        try {
+            User user = userService.findByUsername(username);
+            user.setState(AccountState.LOCKED);
+            userService.updateUser(user);
+        } catch (Exception e) {
+            model.setStatusCode(HttpStatusCode.INTERNAL_SERVER_ERROR);
+            model.setMessage("服务器内部出错");
+        }
+        return model;
+    }
+
+    /**
+     * @Description: 解锁账户
+     * @Param: [userId, status]
+     * @return: com.xmmufan.project.constant.http.ResponseModel
+     * @Author: Mr.Hergua
+     * @Date: 2018/11/13
+     */
+    @PostMapping(value = "/unlockAccount")
+    public ResponseModel unlockAccount(String username) {
+        ResponseModel model = new ResponseModel();
+        try {
+            User user = userService.findByUsername(username);
+            user.setState(AccountState.ACTIVE);
+            userService.updateUser(user);
+        } catch (Exception e) {
+            model.setStatusCode(HttpStatusCode.INTERNAL_SERVER_ERROR);
+            model.setMessage("服务器内部出错");
+        }
+        return model;
+    }
+
+    /**
+     * @Description: 获取所有用户信息
+     * @Param: []
+     * @return: com.xmmufan.project.constant.http.ResponseModel
+     * @Author: Mr.Hergua
+     * @Date: 2018/11/13
+     */
+    @GetMapping(value = "/queryAllUser")
+    public ResponseModel queryAllUser() {
+        ResponseModel model = new ResponseModel();
+        try {
+            model.setData(userService.queryAllUser());
         } catch (Exception e) {
             model.setStatusCode(HttpStatusCode.INTERNAL_SERVER_ERROR);
             model.setMessage("服务器内部出错");
@@ -146,7 +208,7 @@ public class UserController extends BaseRestController {
             model.setMessage("该用户名可以使用");
         } catch (AccountException e) {
             model.setStatusCode(HttpStatusCode.INTERNAL_SERVER_ERROR);
-            model.setMessage("用户名已存在");
+            model.setMessage(e.getMessage());
         }
         return model;
     }

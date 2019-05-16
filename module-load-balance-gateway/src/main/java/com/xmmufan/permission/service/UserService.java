@@ -2,6 +2,8 @@ package com.xmmufan.permission.service;
 
 import com.xmmufan.permission.domain.permission.User;
 
+import java.util.List;
+
 /**
  * @author: Mr.Hergua | 黄源钦
  * @version: 1.0     2018/11/13
@@ -17,5 +19,7 @@ public interface UserService {
     User updateUser(User user);
 
     User findById(Long id);
+
+    List<User> queryAllUser();
 
 }

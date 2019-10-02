@@ -3,6 +3,11 @@ package com.xmmufan.permission.domain.permission;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xmmufan.permission.domain.UserInfo;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,6 +21,10 @@ import java.util.List;
  */
 
 @Entity
+@Setter
+@Getter
+@Accessors(chain = true)
+@Builder
 public class User implements Serializable {
 
     @Id
@@ -59,62 +68,5 @@ public class User implements Serializable {
     @JsonIgnore
     private List<SysRole> roleList;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public byte getState() {
-        return state;
-    }
-
-    public void setState(byte state) {
-        this.state = state;
-    }
-
-    public List<SysRole> getRoleList() {
-        return roleList;
-    }
-
-    public void setRoleList(List<SysRole> roleList) {
-        this.roleList = roleList;
-    }
 
 }

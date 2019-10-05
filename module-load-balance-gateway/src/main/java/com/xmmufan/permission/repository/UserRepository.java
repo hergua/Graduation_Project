@@ -1,10 +1,9 @@
 package com.xmmufan.permission.repository;
 
-import com.xmmufan.permission.domain.permission.User;
+import com.xmmufan.permission.domain.rbac.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
 /**
  * @author: Mr.Hergua | 黄源钦
@@ -14,8 +13,6 @@ import java.util.List;
  */
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long> {
-
-    List<User> findByUsername(String username);
+public interface UserRepository extends JpaRepository<User,String> {
 
 }

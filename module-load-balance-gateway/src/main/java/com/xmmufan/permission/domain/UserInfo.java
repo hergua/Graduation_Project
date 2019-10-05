@@ -16,8 +16,6 @@ import java.sql.Timestamp;
  * </p>
  */
 
-@Entity
-@Table(name = "sys_user_info")
 public class UserInfo {
 
     @Id

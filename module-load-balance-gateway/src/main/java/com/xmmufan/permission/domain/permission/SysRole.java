@@ -12,7 +12,6 @@ import java.util.List;
  * </p>
  */
 
-@Entity
 public class SysRole implements Serializable {
 
     @Id

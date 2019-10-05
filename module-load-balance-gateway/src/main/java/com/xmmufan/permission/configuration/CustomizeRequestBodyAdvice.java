@@ -1,4 +1,4 @@
-package com.xmmufan.permission.configuration.premission;
+package com.xmmufan.permission.configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;

@@ -11,7 +11,6 @@ import java.util.List;
  * </p>
  */
 
-@Entity
 public class SysPermission implements Serializable {
 
     @Id

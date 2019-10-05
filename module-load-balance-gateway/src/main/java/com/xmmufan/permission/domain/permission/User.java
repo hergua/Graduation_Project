@@ -20,7 +20,6 @@ import java.util.List;
  * </p>
  */
 
-@Entity
 @Setter
 @Getter
 @Accessors(chain = true)

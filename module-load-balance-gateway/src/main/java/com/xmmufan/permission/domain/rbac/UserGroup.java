@@ -29,7 +29,7 @@ public class UserGroup {
 
     private String description;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "userGroup_permission_mapper")
     private List<Permission> basicPermissions;
 

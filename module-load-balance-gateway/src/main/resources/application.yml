@@ -3,27 +3,27 @@ server:
 
 #router to url
 #config the route to mapping path
-#zuul:
-#  routes:
-#    article-service-module:
-#      path: /SERVICE-MODULE-ARTICLE/**
-#      serviceId: SERVICE-MODULE-ARTICLE
-#    micro-mall-service-module:
-#      path: /SERVICE-MODULE-MICRO-PROGRAM/**
-#      serviceId: SERVICE-MODULE-MICRO-PROGRAM
+zuul:
+  routes:
+    article-service-module:
+      path: /SERVICE-MODULE-ARTICLE/**
+      serviceId: SERVICE-MODULE-ARTICLE
+    micro-mall-service-module:
+      path: /SERVICE-MODULE-MICRO-PROGRAM/**
+      serviceId: SERVICE-MODULE-MICRO-PROGRAM
 
-#endpoints:
-#  routes:
-#    sensitive: false
-#
-#ribbon:
-#  ReadTimeout: 20000
-#  ConnectTimeout: 20000
+endpoints:
+  routes:
+    sensitive: false
 
-#oauth2:
-#  ribbon:
-#    ReadTimeout: 20000
-#    ConnectTimeout: 20000
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+oauth2:
+  ribbon:
+    ReadTimeout: 20000
+    ConnectTimeout: 20000
 
 publickey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAK/0YWAoLWtrRcqA5NnmgxRmeyWRSnZzyxCWYWxHm9qk4LxtpyLNz1OkkYuTdUajbERuN1L68S0xHewVNv6elOcCAwEAAQ==
 spring:

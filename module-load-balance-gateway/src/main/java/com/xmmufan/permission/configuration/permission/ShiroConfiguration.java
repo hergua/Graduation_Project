@@ -1,6 +1,5 @@
-package com.xmmufan.permission.configuration.permission;
+package com.xmmufan.permission.configuration.premission;
 
-import com.xmmufan.permission.repository.PermissionResourceRepository;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -31,9 +30,6 @@ public class ShiroConfiguration {
     public static final String LOG_OUT_PATH = "/logout";
     public static final String STATIC_RESOURCE_PATH = "/static/**";
     public static final String SUBMIT_LOGIN_PATH = "/subLogin";
-    public static final String ALL_PATH = "/**";
-    public static final String USER_REGISTER_PATH = "/user/addUser";
-
 
 
     public static final String DISABLED_LOGIN = "anon";
@@ -58,21 +54,22 @@ public class ShiroConfiguration {
      * 进行数据库读取权限映射信息，设置进拦截列表map中
      */
     @Bean(name = "shiroFilterFactoryBean")
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager, PermissionResourceRepository resourceRepository) {
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager, SysPermissionService sysPermissionService) {
 
 
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put(ALL_PATH, DISABLED_LOGIN);
-//        filterChainDefinitionMap.put(LOG_OUT_PATH, "logout");
-//        filterChainDefinitionMap.put(STATIC_RESOURCE_PATH, DISABLED_LOGIN);
-//        filterChainDefinitionMap.put(SUBMIT_LOGIN_PATH,DISABLED_LOGIN);
-//        filterChainDefinitionMap.put(USER_REGISTER_PATH,DISABLED_LOGIN);
-//        resourceRepository.findAll().forEach(resource -> filterChainDefinitionMap.put(resource.getUrl(), "authc, perms["+resource.getOperation()+"]"));
-//        filterChainDefinitionMap.put(ALL_PATH, REQUIRE_LOGIN);
-//        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+        filterChainDefinitionMap.put(LOG_OUT_PATH, "logout");
+        filterChainDefinitionMap.put(STATIC_RESOURCE_PATH, DISABLED_LOGIN);
+        filterChainDefinitionMap.put(SUBMIT_LOGIN_PATH,DISABLED_LOGIN);
+        filterChainDefinitionMap.put("/user/addUser",DISABLED_LOGIN);
+//        sysPermissionService.findAllPermissions().forEach(sysPermission -> filterChainDefinitionMap.put(sysPermission.getUrl(),
+//                "authc, perms["+sysPermission.getPermission()+"]"));
+//        filterChainDefinitionMap.put("/**", "anon");
+        shiroFilterFactoryBean.setSuccessUrl("/index");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return shiroFilterFactoryBean;
@@ -84,8 +81,8 @@ public class ShiroConfiguration {
      * 负责用户的认证和权限的处理，可以参考JdbcRealm的实现。
      */
     @Bean
-    public com.xmmufan.permission.configuration.premission.CustomizeUserAuthorizingRealm userAuthorizingRealm() {
-        return new com.xmmufan.permission.configuration.premission.CustomizeUserAuthorizingRealm();
+    public UserAuthorizingRealm userAuthorizingRealm() {
+        return new UserAuthorizingRealm();
     }
 
     /**

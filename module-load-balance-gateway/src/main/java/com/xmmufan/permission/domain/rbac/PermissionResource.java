@@ -1,5 +1,6 @@
 package com.xmmufan.permission.domain.rbac;
 
+import com.xmmufan.permission.constant.permission.DataOperationEnum;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -28,6 +29,7 @@ public class PermissionResource implements Serializable {
     private String url;
 
     private String operation;
+
 
 
 }

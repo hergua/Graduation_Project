@@ -74,13 +74,4 @@ public class UserAccountServiceImpl implements UserAccountService {
         return accountRepository.queryByUsername(username);
     }
 
-    @Override
-    public boolean existUsername(String username) {
-        return findByUsername(username) != null;
-    }
-
-    @Override
-    public UserAccount saveUserAccount(UserAccount account) {
-        return accountRepository.save(account);
-    }
 }

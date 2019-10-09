@@ -19,8 +19,4 @@ public interface UserAccountService {
 
     UserAccount findByUsername(String username);
 
-    boolean existUsername(String username);
-
-    UserAccount saveUserAccount(UserAccount account);
-
 }

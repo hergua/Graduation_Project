@@ -1,0 +1,38 @@
+[
+  {
+    "className": "com.xmmufan.permission.controller.UrlMapperController",
+    "method": "mappingList",
+    "type": "GET",
+    "url": "/mapping/getAllControllerMapping"
+  },
+  {
+    "className": "com.xmmufan.permission.controller.UserController",
+    "method": "subLogin",
+    "type": "POST",
+    "url": "/user/subLogin"
+  },
+  {
+    "className": "com.xmmufan.permission.controller.UserController",
+    "method": "queryAllUser",
+    "type": "GET",
+    "url": "/user/queryAllUser"
+  },
+  {
+    "className": "com.xmmufan.permission.controller.UserController",
+    "method": "addUser",
+    "type": "POST",
+    "url": "/user/addUser"
+  },
+  {
+    "className": "org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController",
+    "method": "error",
+    "type": "",
+    "url": "/error"
+  },
+  {
+    "className": "org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController",
+    "method": "errorHtml",
+    "type": "",
+    "url": "/error"
+  }
+]

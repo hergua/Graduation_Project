@@ -3,8 +3,10 @@ package com.xmmufan.permission.algorithm;
 /**
  * @author Hergua
  */
+
 public class SnowFlake {
 
+    private static SnowFlake snowFlake = null;
 
     /**
      * 起始的时间戳
@@ -51,17 +53,22 @@ public class SnowFlake {
         this.machineId = machineId;
     }
 
-    public SnowFlake() {
-        new SnowFlake(datacenterId,machineId);
+    private SnowFlake() {
+        new SnowFlake(datacenterId, machineId);
     }
 
-    /**
-     * 产生下一个ID
-     *
-     * @return
-     */
+    public static long getNextSerialId() {
+        return getCurrentFlake().nextId();
+    }
+
+    private static SnowFlake getCurrentFlake() {
+        snowFlake = snowFlake == null ? new SnowFlake() : snowFlake;
+        return snowFlake;
+    }
+
+
     public synchronized long nextId() {
-        long currStmp = getNewstmp();
+        long currStmp = getNewStmp();
         if (currStmp < lastStmp) {
             throw new RuntimeException("Clock moved backwards.  Refusing to generate id");
         }
@@ -87,14 +94,14 @@ public class SnowFlake {
     }
 
     private long getNextMill() {
-        long mill = getNewstmp();
+        long mill = getNewStmp();
         while (mill <= lastStmp) {
-            mill = getNewstmp();
+            mill = getNewStmp();
         }
         return mill;
     }
 
-    private long getNewstmp() {
+    private long getNewStmp() {
         return System.currentTimeMillis();
     }
 

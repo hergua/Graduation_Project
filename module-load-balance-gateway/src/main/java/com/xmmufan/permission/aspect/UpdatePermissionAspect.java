@@ -1,6 +1,6 @@
 package com.xmmufan.permission.aspect;
 
-import com.xmmufan.permission.configuration.premission.ShiroService;
+import com.xmmufan.permission.configuration.permission.ShiroService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;

@@ -2,7 +2,7 @@ package com.xmmufan.permission.aspect;
 
 import com.xmmufan.permission.algorithm.SnowFlake;
 import com.xmmufan.permission.constant.exception.AccountException;
-import com.xmmufan.permission.domain.permission.User;
+import com.xmmufan.permission.domain.rbac.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;

@@ -24,3 +24,36 @@ oauth2:
   ribbon:
     ReadTimeout: 20000
     ConnectTimeout: 20000
+
+publickey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAK/0YWAoLWtrRcqA5NnmgxRmeyWRSnZzyxCWYWxHm9qk4LxtpyLNz1OkkYuTdUajbERuN1L68S0xHewVNv6elOcCAwEAAQ==
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://hergua.cn:3306/permission?useUnicode=true&characterEncoding=utf-8
+    username: server
+    password: AoRPgnVxlq60xigEUw8SuTBRbH6GGhlkoA5NqIM/tIZshfW3nrXiSst85lIkpZ/o6vztM74V3D3Atb137beDwQ==
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbcp2:
+      initial-size: 1
+      min-idle: 3
+      max-idle: 20
+      max-wait-millis: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 30000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+    druid:
+      filters: config
+      connection-properties: config.decrypt=true;config.decrypt.key=${publickey}
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+

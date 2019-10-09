@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
 @Data
 @Builder
 @AllArgsConstructor
-public class Permission {
+public class Permission implements Serializable {
 
     @Id
     @GeneratedValue

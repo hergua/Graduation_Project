@@ -1,10 +1,8 @@
 package com.xmmufan.permission.repository;
 
-import com.xmmufan.permission.domain.permission.SysRole;
+import com.xmmufan.permission.domain.rbac.Permission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 
 /**
@@ -14,6 +12,6 @@ import java.util.List;
  * </p>
  */
 @Repository
-public interface SysRoleRepository extends JpaRepository<SysRole,Integer> {
-    List<SysRole> findByRole(String role);
+public interface PermissionRepository extends JpaRepository<Permission,String> {
+
 }

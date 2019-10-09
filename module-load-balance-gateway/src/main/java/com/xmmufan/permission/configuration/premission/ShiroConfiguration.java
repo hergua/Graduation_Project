@@ -1,6 +1,5 @@
 package com.xmmufan.permission.configuration.premission;
 
-import com.xmmufan.permission.service.SysPermissionService;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -28,6 +27,15 @@ import java.util.Map;
 @Configuration
 public class ShiroConfiguration {
 
+    public static final String LOG_OUT_PATH = "/logout";
+    public static final String STATIC_RESOURCE_PATH = "/static/**";
+    public static final String SUBMIT_LOGIN_PATH = "/subLogin";
+
+
+    public static final String DISABLED_LOGIN = "anon";
+    public static final String REQUIRE_LOGIN = "authc";
+
+
 
     /**
      * LifecycleBeanPostProcessor，这是个DestructionAwareBeanPostProcessor的子类，
@@ -53,20 +61,18 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/static/**", "anon");
-        filterChainDefinitionMap.put("/user/subLogin","anon");
-        filterChainDefinitionMap.put("/user/addUser","anon");
+        filterChainDefinitionMap.put(LOG_OUT_PATH, "logout");
+        filterChainDefinitionMap.put(STATIC_RESOURCE_PATH, DISABLED_LOGIN);
+        filterChainDefinitionMap.put(SUBMIT_LOGIN_PATH,DISABLED_LOGIN);
+        filterChainDefinitionMap.put("/user/addUser",DISABLED_LOGIN);
 //        sysPermissionService.findAllPermissions().forEach(sysPermission -> filterChainDefinitionMap.put(sysPermission.getUrl(),
 //                "authc, perms["+sysPermission.getPermission()+"]"));
-        filterChainDefinitionMap.put("/**", "anon");
+//        filterChainDefinitionMap.put("/**", "anon");
         shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return shiroFilterFactoryBean;
-
-
     }
 
 

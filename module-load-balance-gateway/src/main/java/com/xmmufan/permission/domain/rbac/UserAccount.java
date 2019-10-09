@@ -3,6 +3,7 @@ package com.xmmufan.permission.domain.rbac;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author 黄源钦
@@ -11,7 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @Data
-public class UserAccount {
+public class UserAccount implements Serializable {
 
     @Id
     @GeneratedValue
@@ -29,8 +30,7 @@ public class UserAccount {
     @Column(nullable = false, columnDefinition = "tinyint default true")
     private boolean enable;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(nullable = false, columnDefinition = "enum('MD5') default 'MD5'")
+    private String encryptedAlgorithm;
 
 }

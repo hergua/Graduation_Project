@@ -1,6 +1,5 @@
 package com.xmmufan.permission.configuration.premission;
 
-import com.xmmufan.permission.service.SysPermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;

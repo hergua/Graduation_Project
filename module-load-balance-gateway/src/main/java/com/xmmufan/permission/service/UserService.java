@@ -1,6 +1,8 @@
 package com.xmmufan.permission.service;
 
-import com.xmmufan.permission.domain.permission.User;
+
+import com.xmmufan.permission.domain.rbac.User;
+import com.xmmufan.permission.domain.rbac.UserAccount;
 
 import java.util.List;
 
@@ -12,14 +14,14 @@ import java.util.List;
  */
 public interface UserService {
 
-    User findByUsername(String username);
-
     User saveUser(User user);
 
     User updateUser(User user);
 
-    User findById(Long id);
+    User queryById(String id);
 
     List<User> queryAllUser();
+
+    User queryByAccount(UserAccount account);
 
 }

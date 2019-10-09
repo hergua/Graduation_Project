@@ -4,7 +4,6 @@ package com.xmmufan.permission.controller;
 import com.xmmufan.permission.algorithm.SnowFlake;
 import com.xmmufan.permission.constant.http.HttpStatusCode;
 import com.xmmufan.permission.constant.http.ResponseModel;
-import com.xmmufan.permission.domain.UserInfo;
 import com.xmmufan.permission.domain.permission.User;
 import com.xmmufan.permission.service.UserInfoService;
 import com.xmmufan.permission.service.UserService;

@@ -1,5 +1,6 @@
-package com.xmmufan.permission.configuration.premission;
+package com.xmmufan.permission.configuration.permission;
 
+import com.xmmufan.permission.service.PermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
@@ -26,12 +27,12 @@ public class ShiroService {
 
     private final ShiroFilterFactoryBean shiroFilterFactoryBean;
 
-    private final SysPermissionService sysPermissionService;
+    private final PermissionService permissionService;
 
     @Autowired
-    public ShiroService(ShiroFilterFactoryBean shiroFilterFactoryBean, SysPermissionService sysPermissionService) {
+    public ShiroService(ShiroFilterFactoryBean shiroFilterFactoryBean, PermissionService permissionService) {
         this.shiroFilterFactoryBean = shiroFilterFactoryBean;
-        this.sysPermissionService = sysPermissionService;
+        this.permissionService = permissionService;
     }
 
     /**
@@ -45,8 +46,9 @@ public class ShiroService {
         Map<String, String> filterChainDefinitionMap = new HashMap<>(30);
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/user/subLogin", "anon");
-        sysPermissionService.findAllPermissions().forEach(sysPermission -> filterChainDefinitionMap.put(sysPermission.getUrl(),
-                "authc, perms[" + sysPermission.getPermission() + "]"));
+        permissionService.queryAllPermission().forEach(permission ->
+                permission.getResources().forEach(resource ->
+                        filterChainDefinitionMap.put(resource.getUrl(), "authc, perms[" + resource.getOperation() + "]")));
         filterChainDefinitionMap.put("/**", "authc");
         return filterChainDefinitionMap;
     }

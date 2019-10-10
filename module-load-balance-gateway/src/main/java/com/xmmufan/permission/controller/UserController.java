@@ -96,27 +96,14 @@ public class UserController extends BaseRestController {
      */
     @PostMapping(value = "/addUser")
     @EncryptedPasswordAndSalt
-    public ResponseModel addUser(@RequestBody UserAccount account) {
-        ResponseModel model = new ResponseModel();
-        try {
-            if (StringUtils.isAnyBlank(account.getUsername(), account.getPassword())) {
-                throw new AccountInfoMissingException("用户名或密码缺失");
-            }
-            if (accountService.existUsername(account.getUsername())) {
-                log.warn(accountService.findByUsername(account.getUsername()).toString());
-                throw new AccountException("用户名已存在");
-            }
-            accountService.saveUserAccount(account);
-        } catch (AccountException e) {
-            model.setStatusCode(HttpStatusCode.INTERNAL_SERVER_ERROR);
-            model.setMessage("用户名已存在");
-        } catch (Exception e) {
-            model.setStatusCode(HttpStatusCode.INTERNAL_SERVER_ERROR);
-            model.setMessage("服务器内部出错");
-        }
-        return model;
-    }
+    public void addUser(@RequestBody UserAccount account) throws Exception {
 
+        if (StringUtils.isAnyBlank(account.getUsername(), account.getPassword())) {
+            throw new AccountInfoMissingException("用户名或密码缺失");
+        }
+        accountService.saveUserAccount(account);
+
+    }
 
 
     /**

@@ -19,4 +19,6 @@ public interface UserAccountService {
 
     UserAccount findByUsername(String username);
 
+    void saveUserAccount(UserAccount account) throws AccountException;
+
 }

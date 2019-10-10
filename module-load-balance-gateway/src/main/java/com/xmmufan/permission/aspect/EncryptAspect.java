@@ -3,7 +3,9 @@ package com.xmmufan.permission.aspect;
 import com.xmmufan.permission.algorithm.SnowFlake;
 import com.xmmufan.permission.constant.exception.AccountException;
 import com.xmmufan.permission.domain.rbac.User;
+import com.xmmufan.permission.domain.rbac.UserAccount;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
@@ -35,7 +37,7 @@ public class EncryptAspect {
     }
 
     /**
-     * @Description: 切面自动获取参数User，当id不存在值时，使用雪花算法生成ID
+     * @Description: 切面自动获取参数User 自动加密password 若salt不存在也进行设置
      * @Param: [joinPoint, encryptedPassword]
      * @return: void
      * @Author: Mr.Hergua
@@ -46,23 +48,17 @@ public class EncryptAspect {
 
         Object[] params = joinPoint.getArgs();
         try {
-            for (Object user : params) {
-                if (user instanceof User) {
-                    Method getIdMethod = user.getClass().getDeclaredMethod("getId");
-                    Long idVal = (Long) getIdMethod.invoke(user);
-                    if (idVal == null || idVal == 0) {
-                        Field userId = user.getClass().getDeclaredField("id");
-                        userId.setAccessible(true);
-                        userId.set(user, SnowFlake.getNextSerialId());
-                    }
-
-                    Field userPassword = user.getClass().getDeclaredField("password");
-                    Field userSalt = user.getClass().getDeclaredField("salt");
-                    userSalt.setAccessible(true);
+            for (Object userAccount : params) {
+                if (userAccount instanceof UserAccount) {
+                    Field userPassword = userAccount.getClass().getDeclaredField("password");
+                    Field userSalt = userAccount.getClass().getDeclaredField("salt");
                     userPassword.setAccessible(true);
-                    userSalt.set(user, new SecureRandomNumberGenerator().nextBytes().toHex());
-                    userPassword.set(user, new SimpleHash(encryptedPassword.algorithm(),
-                            userPassword.get(user), ByteSource.Util.bytes(userSalt.get(user)),
+                    userSalt.setAccessible(true);
+                    if (StringUtils.isBlank((String) userAccount.getClass().getDeclaredMethod("getSalt").invoke(userAccount))) {
+                        userSalt.set(userAccount, new SecureRandomNumberGenerator().nextBytes().toHex());
+                    }
+                    userPassword.set(userAccount, new SimpleHash(encryptedPassword.algorithm(),
+                            userPassword.get(userAccount), ByteSource.Util.bytes(userSalt.get(userAccount)),
                             encryptedPassword.hashIterations()).toString());
                 }
             }

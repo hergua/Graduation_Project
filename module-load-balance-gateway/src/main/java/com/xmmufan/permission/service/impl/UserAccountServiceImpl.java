@@ -1,9 +1,13 @@
 package com.xmmufan.permission.service.impl;
 
+import com.xmmufan.permission.aspect.EncryptedPasswordAndSalt;
 import com.xmmufan.permission.constant.exception.AccountException;
+import com.xmmufan.permission.domain.rbac.User;
 import com.xmmufan.permission.domain.rbac.UserAccount;
 import com.xmmufan.permission.repository.UserAccountRepository;
 import com.xmmufan.permission.service.UserAccountService;
+import com.xmmufan.permission.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +22,17 @@ import java.util.Optional;
  * @Date 16:37
  */
 @Service
+@Slf4j
 public class UserAccountServiceImpl implements UserAccountService {
 
     @Autowired
     private UserAccountRepository accountRepository;
 
+    @Autowired
+    private UserService userService;
+
     @Override
+    @EncryptedPasswordAndSalt
     public void updatePassword(String id, String password) throws AccountException {
         Optional<UserAccount> oldAccount = accountRepository.findById(id);
         if (oldAccount.isPresent()){
@@ -74,4 +83,16 @@ public class UserAccountServiceImpl implements UserAccountService {
         return accountRepository.queryByUsername(username);
     }
 
+    @Override
+    @EncryptedPasswordAndSalt
+    public void saveUserAccount(UserAccount account) throws AccountException {
+        if (existUsername(account.getUsername()))
+            throw new AccountException("该用户名已存在！");
+        UserAccount userAccount = accountRepository.save(account);
+        userService.saveUser(User.builder().account(userAccount).build());
+    }
+
+    private boolean existUsername(String username){
+        return accountRepository.queryByUsername(username) != null;
+    }
 }

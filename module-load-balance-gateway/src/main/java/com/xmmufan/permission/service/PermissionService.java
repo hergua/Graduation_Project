@@ -23,5 +23,7 @@ public interface PermissionService {
 
     void modifyAtomResource(String id, List<PermissionResource> atomResources);
 
+    List<Permission> queryAllPermission();
+
 
 }

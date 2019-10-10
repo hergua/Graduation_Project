@@ -2,7 +2,9 @@ package com.xmmufan.permission.service.impl;
 
 import com.xmmufan.permission.domain.rbac.Permission;
 import com.xmmufan.permission.domain.rbac.PermissionResource;
+import com.xmmufan.permission.repository.PermissionRepository;
 import com.xmmufan.permission.service.PermissionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,9 @@ import java.util.List;
  */
 @Service
 public class PermissionServiceImpl implements PermissionService {
+
+    @Autowired
+    private PermissionRepository permissionRepository;
 
     @Override
     public void createPermission(Permission permission) {
@@ -38,5 +43,10 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public void modifyAtomResource(String id, List<PermissionResource> atomResources) {
 
+    }
+
+    @Override
+    public List<Permission> queryAllPermission() {
+        return  permissionRepository.findAll();
     }
 }

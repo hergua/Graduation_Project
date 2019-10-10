@@ -1,6 +1,5 @@
-package com.xmmufan.permission.configuration.premission;
+package com.xmmufan.permission.configuration.permission;
 
-import com.xmmufan.permission.domain.rbac.PermissionResource;
 import com.xmmufan.permission.domain.rbac.User;
 import com.xmmufan.permission.domain.rbac.UserAccount;
 import com.xmmufan.permission.service.UserAccountService;
@@ -48,12 +47,15 @@ public class CustomizeUserAuthorizingRealm extends AuthorizingRealm {
             UserAccount targetAccount = accountService.findByUsername(username);
             User targetUser = userService.queryByAccount(targetAccount);
             userGroup.add(targetUser.getUserGroup().getId());
-            targetUser.getUserGroup().getBasicPermissions().forEach(permission -> {
-                permission.getResources().forEach(resource -> permissionResources.add(resource.getUrl()));
-            });
-            targetUser.getCustomizePermission().forEach(permission -> {
-                permission.getResources().forEach(resource -> permissionResources.add(resource.getUrl()));
-            });
+
+            targetUser.getUserGroup().getBasicPermissions().forEach(permission ->
+                    permission.getResources().forEach(resource ->
+                            permissionResources.add(resource.getUrl())));
+
+            targetUser.getCustomizePermission().forEach(permission ->
+                    permission.getResources().forEach(resource ->
+                            permissionResources.add(resource.getUrl())));
+
         } catch (NullPointerException e) {
             final String message = "No account found for user '" + username +"'";
             log.error(message, e);

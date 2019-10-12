@@ -1,10 +1,14 @@
 package com.xmmufan.permission.domain.rbac;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -16,17 +20,20 @@ import java.util.List;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserGroup {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "idGenerator")
+    @GenericGenerator(name = "idGenerator", strategy = "uuid")
+    @Column(length = 64, nullable = false)
     private String id;
 
+    @NotNull
+    @Column(unique = true)
     private String userGroupName;
 
-    @Column(nullable = false, columnDefinition = "tinyint default true")
-    private boolean enable;
-
+    @NotNull
     private String description;
 
     @ManyToMany
@@ -34,8 +41,7 @@ public class UserGroup {
     private List<Permission> basicPermissions;
 
     @OneToMany
+    @JsonIgnore
     private List<User> users;
 
-    public UserGroup() {
-    }
 }

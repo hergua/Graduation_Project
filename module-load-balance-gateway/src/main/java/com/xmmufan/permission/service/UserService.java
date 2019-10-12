@@ -3,6 +3,7 @@ package com.xmmufan.permission.service;
 
 import com.xmmufan.permission.domain.rbac.User;
 import com.xmmufan.permission.domain.rbac.UserAccount;
+import com.xmmufan.permission.domain.rbac.UserInfo;
 
 import java.util.List;
 
@@ -23,5 +24,7 @@ public interface UserService {
     List<User> queryAllUser();
 
     User queryByAccount(UserAccount account);
+
+    User login(UserAccount account);
 
 }

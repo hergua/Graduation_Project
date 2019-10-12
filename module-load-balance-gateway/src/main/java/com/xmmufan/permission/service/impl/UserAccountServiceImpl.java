@@ -8,6 +8,7 @@ import com.xmmufan.permission.repository.UserAccountRepository;
 import com.xmmufan.permission.service.UserAccountService;
 import com.xmmufan.permission.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;

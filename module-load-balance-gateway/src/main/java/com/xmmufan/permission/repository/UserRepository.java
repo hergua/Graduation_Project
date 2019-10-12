@@ -16,4 +16,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User,String> {
 
     User queryByAccount_Id(String accountId);
+
+    User queryByAccount_Username(String username);
 }

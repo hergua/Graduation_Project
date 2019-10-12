@@ -3,6 +3,7 @@ package com.xmmufan.permission.domain.rbac;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +21,9 @@ import java.util.List;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "idGenerator")
+    @GenericGenerator(name = "idGenerator", strategy = "uuid")
+    @Column(length = 64, nullable = false)
     private String id;
 
     @OneToOne(fetch = FetchType.EAGER)

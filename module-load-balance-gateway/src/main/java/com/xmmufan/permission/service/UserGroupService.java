@@ -1,5 +1,6 @@
 package com.xmmufan.permission.service;
 
+import com.google.protobuf.ServiceException;
 import com.xmmufan.permission.domain.rbac.Permission;
 import com.xmmufan.permission.domain.rbac.User;
 import com.xmmufan.permission.domain.rbac.UserGroup;
@@ -17,17 +18,17 @@ public interface UserGroupService {
 
     void updateUserGroup(UserGroup group);
 
-    void disableUserGroup(String id);
+    void disableUserGroup(String groupId);
 
-    void enableUserGroup(String id);
+    void enableUserGroup(String groupId);
 
-    void grantPermission(String id, List<Permission> grants);
+    void grantPermission(String groupId, List<Permission> grants);
 
-    void revokePermission(String id, List<Permission> revokes);
+    void revokePermission(String groupId, List<Permission> revokes);
 
-    void addUser(String id ,User targetUser);
+    void addUserToGroup(String groupId ,String userId);
 
-    void removeUser(String id, User targetUser);
+    void removeUserFromGroup(String groupId, String userId) throws ServiceException;
 
 
 }

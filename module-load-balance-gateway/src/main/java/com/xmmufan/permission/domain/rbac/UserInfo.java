@@ -2,6 +2,7 @@ package com.xmmufan.permission.domain.rbac;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,8 +17,10 @@ import java.time.LocalDate;
 public class UserInfo {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(generator = "idGenerator")
+    @GenericGenerator(name = "idGenerator", strategy = "uuid")
+    @Column(length = 64, nullable = false)
+    private String id;
 
     @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id")

@@ -1,19 +1,18 @@
 package com.xmmufan.permission.controller;
 
-
-import com.xmmufan.permission.algorithm.SnowFlake;
-import com.xmmufan.permission.constant.http.HttpStatusCode;
-import com.xmmufan.permission.constant.http.ResponseModel;
 import com.xmmufan.permission.domain.rbac.User;
 import com.xmmufan.permission.domain.rbac.UserInfo;
 import com.xmmufan.permission.service.UserInfoService;
 import com.xmmufan.permission.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.lang.reflect.InvocationTargetException;
 
 @RestController
 @RequestMapping(path = "/userInfo")
@@ -31,41 +30,15 @@ public class UserInfoController {
     }
 
     @PostMapping("/saveOrUpdateUserInfo")
-    public void saveUserInfo(UserInfo userInfo, Long userId) {
-//        ResponseModel model = new ResponseModel();
-//        try {
-//            User user = userService.findById(userId);
-//            userInfo.setUser(user);
-//            if (userInfo.getId() == null || userInfo.getId() == 0) {
-//                userInfo.setId(new SnowFlake().nextId());
-//                userInfoService.save(userInfo);
-//            } else if (userInfoService.queryById(userInfo.getId()) != null){
-//                userInfoService.update(userInfo);
-//            }else {
-//                throw new RuntimeException("unknown user status ! call administrator to resolve");
-//            }
-//            log.info("personal info save success   userId : " + userId);
-//        } catch (Exception e) {
-//            log.error(e.getMessage());
-//            model.setMessage(e.getMessage());
-//            model.setStatusCode(HttpStatusCode.INTERNAL_SERVER_ERROR);
-//        }
-//        return model;
+    public void saveUserInfo(UserInfo userInfo, String userId) throws InvocationTargetException, IllegalAccessException {
+        User user = userService.queryById(userId);
+        BeanUtils.copyProperties(user.getInfo(), userInfo);
+        userService.updateUser(user);
     }
 
     @GetMapping("/getUserInfo")
-    public void getUserInfo(Long userId){
-//        ResponseModel model = new ResponseModel();
-//        try {
-//            User user = userService.findById(userId);
-//            UserInfo userInfo = userInfoService.queryByUser(user);
-//            model.setData(userInfo);
-//        } catch (Exception e) {
-//            log.error(e.getLocalizedMessage());
-//            model.setStatusCode(HttpStatusCode.INTERNAL_SERVER_ERROR);
-//            model.setMessage(e.getMessage());
-//        }
-//        return model;
+    public UserInfo getUserInfo(String infoId){
+        return userInfoService.queryById(infoId);
     }
 
 

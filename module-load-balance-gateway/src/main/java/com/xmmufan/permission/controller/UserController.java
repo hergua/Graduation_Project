@@ -1,26 +1,17 @@
 package com.xmmufan.permission.controller;
 
 import com.xmmufan.permission.aspect.EncryptedPasswordAndSalt;
-import com.xmmufan.permission.constant.http.HttpStatusCode;
-import com.xmmufan.permission.constant.exception.AccountInfoMissingException;
-import com.xmmufan.permission.constant.http.ResponseModel;
-import com.xmmufan.permission.constant.permission.AccountState;
 import com.xmmufan.permission.domain.rbac.User;
 import com.xmmufan.permission.domain.rbac.UserAccount;
-import com.xmmufan.permission.domain.rbac.UserInfo;
 import com.xmmufan.permission.domain.vo.UserInfoVo;
 import com.xmmufan.permission.service.UserAccountService;
 import com.xmmufan.permission.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -41,7 +32,6 @@ public class UserController {
 
     private final UserAccountService accountService;
 
-    @Autowired
     public UserController(UserService userService, UserAccountService accountService) {
         this.userService = userService;
         this.accountService = accountService;

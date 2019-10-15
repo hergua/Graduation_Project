@@ -1,5 +1,6 @@
 package com.xmmufan.permission.controller;
 
+import com.google.protobuf.ServiceException;
 import com.xmmufan.permission.domain.rbac.UserGroup;
 import com.xmmufan.permission.domain.vo.UserRequestVo;
 import com.xmmufan.permission.service.UserGroupService;
@@ -35,11 +36,20 @@ public class UserGroupController {
     }
 
     @PostMapping("/addUserToGroup")
-    public void addUser(@RequestBody @Valid UserRequestVo vo){
-        if (StringUtils.isAnyBlank(vo.getUser().getId(), vo.getUserGroup().getId())){
+    public void addUser(String groupId, String userId){
+        if (StringUtils.isAnyBlank(groupId, userId)){
             throw new WebServiceException("参数缺失");
         }else {
-            userGroupService.addUserToGroup(vo.getUserGroup().getId(), vo.getUserGroup().getId());
+            userGroupService.addUserToGroup(groupId, userId);
+        }
+    }
+
+    @PostMapping("/removeUserFromGroup")
+    public void removeUser(String groupId, String userId) throws ServiceException {
+        if (StringUtils.isAnyBlank(groupId, userId)){
+            throw new WebServiceException("参数缺失");
+        }else {
+            userGroupService.removeUserFromGroup(groupId, userId);
         }
     }
 

@@ -25,5 +25,9 @@ public interface PermissionService {
 
     List<Permission> queryAllPermission();
 
+    List<PermissionResource> queryAllResource();
+
+    void deletePermission(String id);
+
 
 }

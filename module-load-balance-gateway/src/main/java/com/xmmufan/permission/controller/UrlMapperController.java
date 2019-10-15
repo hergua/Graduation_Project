@@ -24,7 +24,7 @@ public class UrlMapperController {
 
     @GetMapping("/getAllControllerMapping")
     public List mappingList() {
-        List<HashMap<String, String>> urlList = new ArrayList<>(50);
+        List<HashMap<String, String>> urlList = new ArrayList<>(handlerMapping.getHandlerMethods().size());
 
         handlerMapping.getHandlerMethods().forEach((requestMappingInfo, handlerMethod) -> {
             HashMap<String, String> hashMap = new HashMap<>(8);

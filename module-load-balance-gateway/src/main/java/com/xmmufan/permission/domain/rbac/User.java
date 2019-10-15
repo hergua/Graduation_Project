@@ -3,6 +3,7 @@ package com.xmmufan.permission.domain.rbac;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ import java.util.List;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable {
 
     @Id
@@ -43,6 +45,4 @@ public class User implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "permission_id")})
     private List<Permission> customizePermission;
 
-    public User() {
-    }
 }

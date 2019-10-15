@@ -31,10 +31,11 @@ public class Permission implements Serializable {
     @NotNull
     private String name;
 
+    @NotNull
     private String description;
 
     @Column(columnDefinition = "tinyint default true")
-    private boolean enable;
+    private boolean enable = true;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "permission_resource_mapper")

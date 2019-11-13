@@ -1,44 +1,29 @@
-package com.xmmufan.permission.configuration.permission;
+package com.xmmufan.permission.configuration.permission
 
-import com.xmmufan.permission.repository.PermissionResourceRepository;
-import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.cache.MemoryConstrainedCacheManager;
-import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.spring.LifecycleBeanPostProcessor;
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
-import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
+import com.xmmufan.permission.repository.PermissionResourceRepository
+import org.apache.shiro.cache.CacheManager
+import org.apache.shiro.cache.MemoryConstrainedCacheManager
+import org.apache.shiro.mgt.SecurityManager
+import org.apache.shiro.spring.LifecycleBeanPostProcessor
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.DependsOn
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.LinkedHashMap
 
 /**
  * @author: Mr.Hergua | 黄源钦
  * @version: 1.0     2018/11/12
- * <p>
- *     shiro配置类
- * </p>
+ * shiro配置类
  */
 
 @Configuration
-public class ShiroConfiguration {
-
-    public static final String LOG_OUT_PATH = "/logout";
-    public static final String STATIC_RESOURCE_PATH = "/static/**";
-    public static final String SUBMIT_LOGIN_PATH = "/subLogin";
-    public static final String ALL_PATH = "/**";
-    public static final String USER_REGISTER_PATH = "/user/addUser";
-
-
-
-    public static final String DISABLED_LOGIN = "anon";
-    public static final String REQUIRE_LOGIN = "authc";
-
+open class ShiroConfiguration {
 
 
     /**
@@ -46,10 +31,8 @@ public class ShiroConfiguration {
      * 负责org.apache.shiro.util.Initializable类型bean的生命周期的，初始化和销毁。
      * 主要是AuthorizingRealm类的子类，以及EhCacheManager类。
      */
-    @Bean(name = "lifecycleBeanPostProcessor")
-    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-        return new LifecycleBeanPostProcessor();
-    }
+    @Bean(name = ["lifecycleBeanPostProcessor"])
+    open fun lifecycleBeanPostProcessor(): LifecycleBeanPostProcessor = LifecycleBeanPostProcessor()
 
 
     /**
@@ -57,25 +40,25 @@ public class ShiroConfiguration {
      * 它主要保持了三项数据，securityManager，filters，filterChainDefinitionManager。
      * 进行数据库读取权限映射信息，设置进拦截列表map中
      */
-    @Bean(name = "shiroFilterFactoryBean")
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager, PermissionResourceRepository resourceRepository) {
+    @Bean(name = ["shiroFilterFactoryBean"])
+    open fun shiroFilterFactoryBean(securityManager: SecurityManager, resourceRepository: PermissionResourceRepository): ShiroFilterFactoryBean {
 
 
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
+        val shiroFilterFactoryBean = ShiroFilterFactoryBean()
+        shiroFilterFactoryBean.securityManager = securityManager
 
-        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put(ALL_PATH, DISABLED_LOGIN);
-//        filterChainDefinitionMap.put(LOG_OUT_PATH, "logout");
-//        filterChainDefinitionMap.put(STATIC_RESOURCE_PATH, DISABLED_LOGIN);
-//        filterChainDefinitionMap.put(SUBMIT_LOGIN_PATH,DISABLED_LOGIN);
-//        filterChainDefinitionMap.put(USER_REGISTER_PATH,DISABLED_LOGIN);
-//        resourceRepository.findAll().forEach(resource -> filterChainDefinitionMap.put(resource.getUrl(), "authc, perms["+resource.getOperation()+"]"));
-//        filterChainDefinitionMap.put(ALL_PATH, REQUIRE_LOGIN);
-//        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        val filterChainDefinitionMap = LinkedHashMap<String, String>()
+        filterChainDefinitionMap[ALL_PATH] = DISABLED_LOGIN
+        //        filterChainDefinitionMap.put(LOG_OUT_PATH, "logout");
+        //        filterChainDefinitionMap.put(STATIC_RESOURCE_PATH, DISABLED_LOGIN);
+        //        filterChainDefinitionMap.put(SUBMIT_LOGIN_PATH,DISABLED_LOGIN);
+        //        filterChainDefinitionMap.put(USER_REGISTER_PATH,DISABLED_LOGIN);
+        //        resourceRepository.findAll().forEach(resource -> filterChainDefinitionMap.put(resource.getUrl(), "authc, perms["+resource.getOperation()+"]"));
+        //        filterChainDefinitionMap.put(ALL_PATH, REQUIRE_LOGIN);
+        //        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+        shiroFilterFactoryBean.filterChainDefinitionMap = filterChainDefinitionMap
 
-        return shiroFilterFactoryBean;
+        return shiroFilterFactoryBean
     }
 
 
@@ -84,9 +67,7 @@ public class ShiroConfiguration {
      * 负责用户的认证和权限的处理，可以参考JdbcRealm的实现。
      */
     @Bean
-    public CustomizeUserAuthorizingRealm userAuthorizingRealm() {
-        return new CustomizeUserAuthorizingRealm();
-    }
+    open fun userAuthorizingRealm(): CustomizeUserAuthorizingRealm = CustomizeUserAuthorizingRealm()
 
     /**
      * EhCacheManager，缓存管理，用户登陆成功后，把用户信息和权限信息缓存起来，
@@ -94,32 +75,26 @@ public class ShiroConfiguration {
      */
     @Bean
     @DependsOn("lifecycleBeanPostProcessor")
-    public CacheManager cacheManager() {
-        return new MemoryConstrainedCacheManager();
-    }
+    open fun cacheManager(): CacheManager = MemoryConstrainedCacheManager()
 
     /**
-     * SecurityManager，权限管理，这个类组合了登陆，登出，权限，session的处理，是个比较重要的类。
-     * //
+     * SecurityManager，权限管理，这个类组合了登陆，登出，权限，session的处理。
      */
     @Bean
-    public SecurityManager securityManager() {
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(userAuthorizingRealm());
-        securityManager.setCacheManager(cacheManager());
-        return securityManager;
+    open fun securityManager(): SecurityManager {
+        return DefaultWebSecurityManager().apply {
+            this.setRealm(userAuthorizingRealm())
+            this.cacheManager = cacheManager()
+        }
     }
 
 
-    /**
-     * DefaultAdvisorAutoProxyCreator，Spring的一个bean，由Advisor决定对哪些类的方法进行AOP代理。
-     */
     @Bean
     @ConditionalOnMissingBean
-    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
-        DefaultAdvisorAutoProxyCreator defaultAAP = new DefaultAdvisorAutoProxyCreator();
-        defaultAAP.setProxyTargetClass(true);
-        return defaultAAP;
+    open fun defaultAdvisorAutoProxyCreator(): DefaultAdvisorAutoProxyCreator {
+        return DefaultAdvisorAutoProxyCreator().apply {
+            this.isProxyTargetClass = true
+        }
     }
 
     /**
@@ -128,10 +103,23 @@ public class ShiroConfiguration {
      * 内部使用AopAllianceAnnotationsAuthorizingMethodInterceptor来拦截用以下注解的方法。
      */
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
-        AuthorizationAttributeSourceAdvisor aASA = new AuthorizationAttributeSourceAdvisor();
-        aASA.setSecurityManager(securityManager());
-        return aASA;
+    open fun authorizationAttributeSourceAdvisor(): AuthorizationAttributeSourceAdvisor {
+        return AuthorizationAttributeSourceAdvisor().apply {
+            this.securityManager = securityManager()
+        }
+    }
+
+    companion object {
+
+        val LOG_OUT_PATH = "/logout"
+        val STATIC_RESOURCE_PATH = "/static/**"
+        val SUBMIT_LOGIN_PATH = "/subLogin"
+        val ALL_PATH = "/**"
+        val USER_REGISTER_PATH = "/user/addUser"
+
+
+        val DISABLED_LOGIN = "anon"
+        val REQUIRE_LOGIN = "authc"
     }
 
 }
